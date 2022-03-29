@@ -1,0 +1,16 @@
+builders:
+  protoBuilder:
+    import: "package:proto_builder/proto_builder.dart"
+    builder_factories: ["protoBuilder"]
+    build_extensions: {'^protos/{{}}.proto': ['lib/src/proto/{{}}.pb.dart', 'lib/src/proto/{{}}.pbenum.dart', 'lib/src/proto/{{}}.pbjson.dart', 'lib/src/proto/{{}}.pbgrpc.dart']}
+    auto_apply: root_package
+    build_to: source
+
+targets:
+  $default:
+    sources:
+      - protos/**
+      - lib/**
+      # Note that it is important to include these in the default target.
+      - pubspec.*
+      - $package$
