@@ -22,7 +22,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "flutter precache --web && dart pub global activate protoc_plugin",
+	"postCreateCommand": "flutter precache --web && dart pub global activate protoc_plugin && dart pub global activate mono_repo && mono_repo pub get",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
