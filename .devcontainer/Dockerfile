@@ -50,8 +50,14 @@ RUN curl -LO https://github.com/improbable-eng/grpc-web/releases/download/v${GRP
 RUN unzip grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip -d /home/${ENDUSER}/.grpcwebproxy
 RUN mv /home/${ENDUSER}/.grpcwebproxy/dist/grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64 /home/${ENDUSER}/.grpcwebproxy/dist/grpcwebproxy
 
+# Download protolint
+ENV PROTOLINT_VERSION=0.37.1
+RUN curl -LO https://github.com/yoheimuta/protolint/releases/download/v${PROTOLINT_VERSION}/protolint_${PROTOLINT_VERSION}_Linux_x86_64.tar.gz
+RUN tar -xf protolint_${PROTOLINT_VERSION}_Linux_x86_64.tar.gz --directory /tmp
+RUN mv /tmp/protolint /home/${ENDUSER}/.local/bin/
+
 # Delete files we no longer need
-RUN rm protoc-${PROTOC_VERSION}-linux-x86_64.zip && rm grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip
+RUN rm protoc-${PROTOC_VERSION}-linux-x86_64.zip && rm grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip && rm protolint_${PROTOLINT_VERSION}_Linux_x86_64.tar.gz
 
 # Update Path for Dart, Flutter and Protocol Buffers compiler
 ENV PATH=/home/${ENDUSER}/.flutter/bin:/home/${ENDUSER}/.local/bin:/home/${ENDUSER}/.pub-cache/bin:/home/${ENDUSER}/.grpcwebproxy/dist:/home/${ENDUSER}/.pub-cache/bin:$PATH
