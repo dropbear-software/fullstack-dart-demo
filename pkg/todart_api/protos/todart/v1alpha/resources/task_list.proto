@@ -1,0 +1,16 @@
+// TaskList Resource
+
+syntax = "proto3";
+
+package dropbear.dev.todart.v1alpha.resources;
+
+import "google/api/field_behavior.proto";
+
+// A resource representing a list of tasks
+message TaskList {
+  // Output only. The ID of the ad.
+  optional string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // The title of the tasklist
+  string title = 2;
+}
