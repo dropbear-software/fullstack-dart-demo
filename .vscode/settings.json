@@ -1,9 +1,10 @@
 {
   "protoc": {
       "path": "/home/vscode/.local/bin/protoc",
-      "compile_on_save": false,
+      "compile_on_save": true,
       "options": [
           "--proto_path=${workspaceRoot}/pkg/todart_api/protos",
+          "--dart_out=grpc:${workspaceRoot}/pkg/todart_api/lib/src/proto"
       ]
   }
 }
