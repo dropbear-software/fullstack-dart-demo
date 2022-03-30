@@ -46,12 +46,18 @@ RUN unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /home/${ENDUSER}/.local
 
 # Download gRPC Web Proxy
 ENV GRPC_WEB_PROXY_VERSION=0.15.0
-RUN curl -L0 https://github.com/improbable-eng/grpc-web/releases/download/v${GRPC_WEB_PROXY_VERSION}/grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip
+RUN curl -LO https://github.com/improbable-eng/grpc-web/releases/download/v${GRPC_WEB_PROXY_VERSION}/grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip
 RUN unzip grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip -d /home/${ENDUSER}/.grpcwebproxy
 RUN mv /home/${ENDUSER}/.grpcwebproxy/dist/grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64 /home/${ENDUSER}/.grpcwebproxy/dist/grpcwebproxy
 
+# Delete files we no longer need
+RUN rm protoc-${PROTOC_VERSION}-linux-x86_64.zip && rm grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip
+
 # Update Path for Dart, Flutter and Protocol Buffers compiler
-ENV PATH=/home/${ENDUSER}/.flutter/bin:/home/${ENDUSER}/.local/bin:/home/${ENDUSER}/.pub-cache/bin:PATH=/home/${ENDUSER}/.grpcwebproxy/dist:$PATH
+ENV PATH=/home/${ENDUSER}/.flutter/bin:/home/${ENDUSER}/.local/bin:/home/${ENDUSER}/.pub-cache/bin:/home/${ENDUSER}/.grpcwebproxy/dist:/home/${ENDUSER}/.pub-cache/bin:$PATH
+
+# Correctly set permissions on the files and folders we just created
+RUN chown -R $ENDUSER:$ENDUSER /home/${ENDUSER}/.flutter/ && chown -R $ENDUSER:$ENDUSER /home/${ENDUSER}/.local/ && chown -R $ENDUSER:$ENDUSER /home/${ENDUSER}/.grpcwebproxy/
 
 # Setting the ENTRYPOINT to docker-init.sh will start up the Docker Engine 
 # inside the container "overrideCommand": false is set in devcontainer.json. 
