@@ -1,0 +1,58 @@
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "app (debug mode)",
+        "cwd": "app",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "program": "lib/main.dart",
+        "deviceId": "web-server",
+        "runTestsOnDevice": false,
+        "args": [
+          "--web-hostname=0.0.0.0", 
+          "--web-port=3000"
+        ],
+      },
+      {
+        "name": "app (profile mode)",
+        "cwd": "app",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "program": "lib/main.dart",
+        "deviceId": "web-server",
+        "runTestsOnDevice": false,
+        "args": [
+          "--web-hostname=0.0.0.0", 
+          "--web-port=3000"
+        ],
+      },
+      {
+        "name": "app (release mode)",
+        "cwd": "app",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "program": "lib/main.dart",
+        "deviceId": "web-server",
+        "runTestsOnDevice": false,
+        "args": [
+          "--web-hostname=0.0.0.0", 
+          "--web-port=3000"
+        ],
+      },
+      {
+        "name": "server",
+        "cwd": "server",
+        "request": "launch",
+        "type": "dart",
+        "program": "bin/todart_server.dart",
+      }
+    ]
+  }
