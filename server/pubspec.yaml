@@ -1,14 +1,18 @@
 name: api_server
 description: A sample command-line application.
 version: 1.0.0
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
 # homepage: https://www.example.com
 
 environment:
   sdk: '>=2.16.2 <3.0.0'
 
 
-# dependencies:
-#   path: ^1.8.0
+dependencies:
+  counter_api: 
+    path: ../pkg/counter_api
+
 
 dev_dependencies:
   lints: ^1.0.0
