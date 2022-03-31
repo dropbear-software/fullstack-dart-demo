@@ -1,7 +1,9 @@
 lint:
+  directories:
+    exclude:
+      - pkg/todart_api/protos/google
   rules:
     all_default: true
-
     add:
       - MESSAGE_NAMES_UPPER_CAMEL_CASE
       - SERVICE_NAMES_UPPER_CAMEL_CASE
@@ -19,3 +21,9 @@ lint:
       - ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
       - ENUM_FIELD_NAMES_UPPER_SNAKE_CASE
       - ENUM_FIELD_NAMES_PREFIX
+   # Linter rules option.
+  rules_option:
+    # MAX_LINE_LENGTH rule option.
+    max_line_length:
+      # Enforces a maximum line length
+      max_chars: 100
