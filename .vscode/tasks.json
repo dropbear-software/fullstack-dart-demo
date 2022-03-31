@@ -13,7 +13,7 @@
         "build"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/pkg/todart_api"
+        "cwd": "${workspaceFolder}/pkg/counter_api"
       },
       "group": "build",
       "presentation": {
