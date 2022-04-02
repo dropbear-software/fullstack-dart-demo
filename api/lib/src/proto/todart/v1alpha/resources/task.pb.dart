@@ -1,6 +1,6 @@
 ///
 //  Generated code. Do not modify.
-//  source: todart/v1alpha/resources/task_list.proto
+//  source: todart/v1alpha/resources/task.proto
 //
 // @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
@@ -9,11 +9,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class TaskList extends $pb.GeneratedMessage {
+class Task extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'TaskList',
+          : 'Task',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -36,8 +36,8 @@ class TaskList extends $pb.GeneratedMessage {
             : 'title')
     ..hasRequiredFields = false;
 
-  TaskList._() : super();
-  factory TaskList({
+  Task._() : super();
+  factory Task({
     $core.String? name,
     $core.String? id,
     $core.String? title,
@@ -54,31 +54,31 @@ class TaskList extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory TaskList.fromBuffer($core.List<$core.int> i,
+  factory Task.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory TaskList.fromJson($core.String i,
+  factory Task.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  TaskList clone() => TaskList()..mergeFromMessage(this);
+  Task clone() => Task()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  TaskList copyWith(void Function(TaskList) updates) =>
-      super.copyWith((message) => updates(message as TaskList))
-          as TaskList; // ignore: deprecated_member_use
+  Task copyWith(void Function(Task) updates) =>
+      super.copyWith((message) => updates(message as Task))
+          as Task; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static TaskList create() => TaskList._();
-  TaskList createEmptyInstance() => create();
-  static $pb.PbList<TaskList> createRepeated() => $pb.PbList<TaskList>();
+  static Task create() => Task._();
+  Task createEmptyInstance() => create();
+  static $pb.PbList<Task> createRepeated() => $pb.PbList<Task>();
   @$core.pragma('dart2js:noInline')
-  static TaskList getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TaskList>(create);
-  static TaskList? _defaultInstance;
+  static Task getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Task>(create);
+  static Task? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);

@@ -13,7 +13,6 @@ import 'dart:typed_data' as $typed_data;
 const ListTaskListsRequest$json = {
   '1': 'ListTaskListsRequest',
   '2': [
-    {'1': 'parent', '3': 1, '4': 1, '5': 9, '10': 'parent'},
     {'1': 'page_size', '3': 2, '4': 1, '5': 5, '10': 'pageSize'},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '10': 'pageToken'},
   ],
@@ -21,7 +20,7 @@ const ListTaskListsRequest$json = {
 
 /// Descriptor for `ListTaskListsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listTaskListsRequestDescriptor = $convert.base64Decode(
-    'ChRMaXN0VGFza0xpc3RzUmVxdWVzdBIWCgZwYXJlbnQYASABKAlSBnBhcmVudBIbCglwYWdlX3NpemUYAiABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4YAyABKAlSCXBhZ2VUb2tlbg==');
+    'ChRMaXN0VGFza0xpc3RzUmVxdWVzdBIbCglwYWdlX3NpemUYAiABKAVSCHBhZ2VTaXplEh0KCnBhZ2VfdG9rZW4YAyABKAlSCXBhZ2VUb2tlbg==');
 @$core.Deprecated('Use listTaskListsResponseDescriptor instead')
 const ListTaskListsResponse$json = {
   '1': 'ListTaskListsResponse',
@@ -56,8 +55,6 @@ final $typed_data.Uint8List getTaskListRequestDescriptor = $convert
 const CreateTaskListRequest$json = {
   '1': 'CreateTaskListRequest',
   '2': [
-    {'1': 'parent', '3': 1, '4': 1, '5': 9, '10': 'parent'},
-    {'1': 'tasklist_id', '3': 2, '4': 1, '5': 9, '10': 'tasklistId'},
     {
       '1': 'tasklist',
       '3': 3,
@@ -71,7 +68,7 @@ const CreateTaskListRequest$json = {
 
 /// Descriptor for `CreateTaskListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createTaskListRequestDescriptor = $convert.base64Decode(
-    'ChVDcmVhdGVUYXNrTGlzdFJlcXVlc3QSFgoGcGFyZW50GAEgASgJUgZwYXJlbnQSHwoLdGFza2xpc3RfaWQYAiABKAlSCnRhc2tsaXN0SWQSPgoIdGFza2xpc3QYAyABKAsyIi50b2RhcnQudjFhbHBoYS5yZXNvdXJjZXMuVGFza0xpc3RSCHRhc2tsaXN0');
+    'ChVDcmVhdGVUYXNrTGlzdFJlcXVlc3QSPgoIdGFza2xpc3QYAyABKAsyIi50b2RhcnQudjFhbHBoYS5yZXNvdXJjZXMuVGFza0xpc3RSCHRhc2tsaXN0');
 @$core.Deprecated('Use updateTaskListRequestDescriptor instead')
 const UpdateTaskListRequest$json = {
   '1': 'UpdateTaskListRequest',

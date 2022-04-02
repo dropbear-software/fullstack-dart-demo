@@ -1,0 +1,110 @@
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+
+syntax = "proto3";
+
+package todart.v1alpha.services;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+import "todart/v1alpha/resources/task.proto";
+
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service TaskService {
+  // See https://google.aip.dev/132
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha/{parent=tasklists/*}/tasks"
+    };
+  }
+
+  // See https://google.aip.dev/131
+  rpc GetTask(GetTaskRequest) returns (todart.v1alpha.resources.Task) {
+    option (google.api.http) = {
+      get: "/v1alpha/{name=tasklists/*/tasks/*}"
+    };
+  }
+
+  // See https://google.aip.dev/133
+  rpc CreateTask(CreateTaskRequest) returns (todart.v1alpha.resources.Task) {
+    option (google.api.http) = {
+      post: "/v1alpha/{parent=tasklists/*}/tasks"
+      body: "task"
+    };
+  }
+
+  // See https://google.aip.dev/134
+  rpc UpdateTask(UpdateTaskRequest) returns (todart.v1alpha.resources.Task) {
+    option (google.api.http) = {
+      patch: "/v1alpha/{name=tasklists/*/tasks/*}"
+      body: "task"
+    };
+  }
+
+  // See https://google.aip.dev/135
+  rpc DeleteTask(DeleteTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha/{name=tasklists/*/tasks/*}"
+    };
+  }
+}
+
+message ListTasksRequest {
+  // The parent resource name, for example, "tasklist/abc123" See: https://google.aip.dev/122
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+    type: "todart.dropbear.dev/TaskList"
+  }];
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListTasksResponse {
+  // The field name should match the noun "task" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated todart.v1alpha.resources.Task tasks = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetTaskRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateTaskRequest {
+  // The parent resource name where the task is to be created.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+    type: "todart.dropbear.dev/TaskList"
+  }];
+
+  // The task resource to create.
+  // The field name should match the Noun in the method name.
+  todart.v1alpha.resources.Task task = 3;
+}
+
+message UpdateTaskRequest {
+  // The task resource which replaces the resource on the server.
+  todart.v1alpha.resources.Task task = 1;
+
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteTaskRequest {
+  // The resource name of the task to be deleted.
+  string name = 1;
+}

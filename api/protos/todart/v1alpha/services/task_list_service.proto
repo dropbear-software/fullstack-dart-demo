@@ -15,21 +15,21 @@ service TaskListService {
   // See https://google.aip.dev/132
   rpc ListTaskLists(ListTaskListsRequest) returns (ListTaskListsResponse) {
     option (google.api.http) = {
-      get: "/v1alpha1/tasklists"
+      get: "/v1alpha/tasklists"
     };
   }
 
   // See https://google.aip.dev/131
   rpc GetTaskList(GetTaskListRequest) returns (todart.v1alpha.resources.TaskList) {
     option (google.api.http) = {
-      get: "/v1alpha1/{name=tasklists/*}"
+      get: "/v1alpha/{name=tasklists/*}"
     };
   }
 
   // See https://google.aip.dev/133
   rpc CreateTaskList(CreateTaskListRequest) returns (todart.v1alpha.resources.TaskList) {
     option (google.api.http) = {
-      post: "/v1alpha1/tasklists"
+      post: "/v1alpha/tasklists"
       body: "tasklist"
     };
   }
@@ -37,7 +37,7 @@ service TaskListService {
   // See https://google.aip.dev/134
   rpc UpdateTaskList(UpdateTaskListRequest) returns (todart.v1alpha.resources.TaskList) {
     option (google.api.http) = {
-      patch: "/v1alpha1/{tasklist.name=tasklists/*}"
+      patch: "/v1alpha/{tasklist.name=tasklists/*}"
       body: "tasklist"
     };
   }
@@ -45,15 +45,12 @@ service TaskListService {
   // See https://google.aip.dev/135
   rpc DeleteTaskList(DeleteTaskListRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1alpha1/{name=tasklists/*}"
+      delete: "/v1alpha/{name=tasklists/*}"
     };
   }
 }
 
 message ListTaskListsRequest {
-  // The parent resource name, for example, "shelves/shelf1"
-  string parent = 1;
-
   // The maximum number of items to return.
   int32 page_size = 2;
 
@@ -76,12 +73,6 @@ message GetTaskListRequest {
 }
 
 message CreateTaskListRequest {
-  // The parent resource name where the tasklist is to be created.
-  string parent = 1;
-
-  // The tasklist id to use for this tasklist.
-  string tasklist_id = 2;
-
   // The tasklist resource to create.
   // The field name should match the Noun in the method name.
   todart.v1alpha.resources.TaskList tasklist = 3;

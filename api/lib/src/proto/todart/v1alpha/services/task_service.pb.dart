@@ -1,6 +1,6 @@
 ///
 //  Generated code. Do not modify.
-//  source: todart/v1alpha/services/task_list_service.proto
+//  source: todart/v1alpha/services/task_service.proto
 //
 // @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
@@ -9,19 +9,24 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../resources/task_list.pb.dart' as $1;
+import '../resources/task.pb.dart' as $1;
 import '../../../google/protobuf/field_mask.pb.dart' as $3;
 
-class ListTaskListsRequest extends $pb.GeneratedMessage {
+class ListTasksRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'ListTaskListsRequest',
+          : 'ListTasksRequest',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
               : 'todart.v1alpha.services'),
       createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'parent')
     ..a<$core.int>(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -35,12 +40,16 @@ class ListTaskListsRequest extends $pb.GeneratedMessage {
             : 'pageToken')
     ..hasRequiredFields = false;
 
-  ListTaskListsRequest._() : super();
-  factory ListTaskListsRequest({
+  ListTasksRequest._() : super();
+  factory ListTasksRequest({
+    $core.String? parent,
     $core.int? pageSize,
     $core.String? pageToken,
   }) {
     final _result = create();
+    if (parent != null) {
+      _result.parent = parent;
+    }
     if (pageSize != null) {
       _result.pageSize = pageSize;
     }
@@ -49,76 +58,87 @@ class ListTaskListsRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory ListTaskListsRequest.fromBuffer($core.List<$core.int> i,
+  factory ListTasksRequest.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory ListTaskListsRequest.fromJson($core.String i,
+  factory ListTasksRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  ListTaskListsRequest clone() =>
-      ListTaskListsRequest()..mergeFromMessage(this);
+  ListTasksRequest clone() => ListTasksRequest()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  ListTaskListsRequest copyWith(void Function(ListTaskListsRequest) updates) =>
-      super.copyWith((message) => updates(message as ListTaskListsRequest))
-          as ListTaskListsRequest; // ignore: deprecated_member_use
+  ListTasksRequest copyWith(void Function(ListTasksRequest) updates) =>
+      super.copyWith((message) => updates(message as ListTasksRequest))
+          as ListTasksRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListTaskListsRequest create() => ListTaskListsRequest._();
-  ListTaskListsRequest createEmptyInstance() => create();
-  static $pb.PbList<ListTaskListsRequest> createRepeated() =>
-      $pb.PbList<ListTaskListsRequest>();
+  static ListTasksRequest create() => ListTasksRequest._();
+  ListTasksRequest createEmptyInstance() => create();
+  static $pb.PbList<ListTasksRequest> createRepeated() =>
+      $pb.PbList<ListTasksRequest>();
   @$core.pragma('dart2js:noInline')
-  static ListTaskListsRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListTaskListsRequest>(create);
-  static ListTaskListsRequest? _defaultInstance;
+  static ListTasksRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListTasksRequest>(create);
+  static ListTasksRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get parent => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set parent($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasParent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParent() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get pageSize => $_getIZ(0);
+  $core.int get pageSize => $_getIZ(1);
   @$pb.TagNumber(2)
   set pageSize($core.int v) {
-    $_setSignedInt32(0, v);
+    $_setSignedInt32(1, v);
   }
 
   @$pb.TagNumber(2)
-  $core.bool hasPageSize() => $_has(0);
+  $core.bool hasPageSize() => $_has(1);
   @$pb.TagNumber(2)
   void clearPageSize() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get pageToken => $_getSZ(1);
+  $core.String get pageToken => $_getSZ(2);
   @$pb.TagNumber(3)
   set pageToken($core.String v) {
-    $_setString(1, v);
+    $_setString(2, v);
   }
 
   @$pb.TagNumber(3)
-  $core.bool hasPageToken() => $_has(1);
+  $core.bool hasPageToken() => $_has(2);
   @$pb.TagNumber(3)
   void clearPageToken() => clearField(3);
 }
 
-class ListTaskListsResponse extends $pb.GeneratedMessage {
+class ListTasksResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'ListTaskListsResponse',
+          : 'ListTasksResponse',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
               : 'todart.v1alpha.services'),
       createEmptyInstance: create)
-    ..pc<$1.TaskList>(
+    ..pc<$1.Task>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'tasklists',
+            : 'tasks',
         $pb.PbFieldType.PM,
-        subBuilder: $1.TaskList.create)
+        subBuilder: $1.Task.create)
     ..aOS(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -126,51 +146,49 @@ class ListTaskListsResponse extends $pb.GeneratedMessage {
             : 'nextPageToken')
     ..hasRequiredFields = false;
 
-  ListTaskListsResponse._() : super();
-  factory ListTaskListsResponse({
-    $core.Iterable<$1.TaskList>? tasklists,
+  ListTasksResponse._() : super();
+  factory ListTasksResponse({
+    $core.Iterable<$1.Task>? tasks,
     $core.String? nextPageToken,
   }) {
     final _result = create();
-    if (tasklists != null) {
-      _result.tasklists.addAll(tasklists);
+    if (tasks != null) {
+      _result.tasks.addAll(tasks);
     }
     if (nextPageToken != null) {
       _result.nextPageToken = nextPageToken;
     }
     return _result;
   }
-  factory ListTaskListsResponse.fromBuffer($core.List<$core.int> i,
+  factory ListTasksResponse.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory ListTaskListsResponse.fromJson($core.String i,
+  factory ListTasksResponse.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  ListTaskListsResponse clone() =>
-      ListTaskListsResponse()..mergeFromMessage(this);
+  ListTasksResponse clone() => ListTasksResponse()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  ListTaskListsResponse copyWith(
-          void Function(ListTaskListsResponse) updates) =>
-      super.copyWith((message) => updates(message as ListTaskListsResponse))
-          as ListTaskListsResponse; // ignore: deprecated_member_use
+  ListTasksResponse copyWith(void Function(ListTasksResponse) updates) =>
+      super.copyWith((message) => updates(message as ListTasksResponse))
+          as ListTasksResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListTaskListsResponse create() => ListTaskListsResponse._();
-  ListTaskListsResponse createEmptyInstance() => create();
-  static $pb.PbList<ListTaskListsResponse> createRepeated() =>
-      $pb.PbList<ListTaskListsResponse>();
+  static ListTasksResponse create() => ListTasksResponse._();
+  ListTasksResponse createEmptyInstance() => create();
+  static $pb.PbList<ListTasksResponse> createRepeated() =>
+      $pb.PbList<ListTasksResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListTaskListsResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListTaskListsResponse>(create);
-  static ListTaskListsResponse? _defaultInstance;
+  static ListTasksResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListTasksResponse>(create);
+  static ListTasksResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$1.TaskList> get tasklists => $_getList(0);
+  $core.List<$1.Task> get tasks => $_getList(0);
 
   @$pb.TagNumber(2)
   $core.String get nextPageToken => $_getSZ(1);
@@ -185,11 +203,11 @@ class ListTaskListsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => clearField(2);
 }
 
-class GetTaskListRequest extends $pb.GeneratedMessage {
+class GetTaskRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'GetTaskListRequest',
+          : 'GetTaskRequest',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -202,8 +220,8 @@ class GetTaskListRequest extends $pb.GeneratedMessage {
             : 'name')
     ..hasRequiredFields = false;
 
-  GetTaskListRequest._() : super();
-  factory GetTaskListRequest({
+  GetTaskRequest._() : super();
+  factory GetTaskRequest({
     $core.String? name,
   }) {
     final _result = create();
@@ -212,32 +230,32 @@ class GetTaskListRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory GetTaskListRequest.fromBuffer($core.List<$core.int> i,
+  factory GetTaskRequest.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory GetTaskListRequest.fromJson($core.String i,
+  factory GetTaskRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  GetTaskListRequest clone() => GetTaskListRequest()..mergeFromMessage(this);
+  GetTaskRequest clone() => GetTaskRequest()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  GetTaskListRequest copyWith(void Function(GetTaskListRequest) updates) =>
-      super.copyWith((message) => updates(message as GetTaskListRequest))
-          as GetTaskListRequest; // ignore: deprecated_member_use
+  GetTaskRequest copyWith(void Function(GetTaskRequest) updates) =>
+      super.copyWith((message) => updates(message as GetTaskRequest))
+          as GetTaskRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static GetTaskListRequest create() => GetTaskListRequest._();
-  GetTaskListRequest createEmptyInstance() => create();
-  static $pb.PbList<GetTaskListRequest> createRepeated() =>
-      $pb.PbList<GetTaskListRequest>();
+  static GetTaskRequest create() => GetTaskRequest._();
+  GetTaskRequest createEmptyInstance() => create();
+  static $pb.PbList<GetTaskRequest> createRepeated() =>
+      $pb.PbList<GetTaskRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetTaskListRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetTaskListRequest>(create);
-  static GetTaskListRequest? _defaultInstance;
+  static GetTaskRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetTaskRequest>(create);
+  static GetTaskRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
@@ -252,94 +270,113 @@ class GetTaskListRequest extends $pb.GeneratedMessage {
   void clearName() => clearField(1);
 }
 
-class CreateTaskListRequest extends $pb.GeneratedMessage {
+class CreateTaskRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'CreateTaskListRequest',
+          : 'CreateTaskRequest',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
               : 'todart.v1alpha.services'),
       createEmptyInstance: create)
-    ..aOM<$1.TaskList>(
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'parent')
+    ..aOM<$1.Task>(
         3,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'tasklist',
-        subBuilder: $1.TaskList.create)
+            : 'task',
+        subBuilder: $1.Task.create)
     ..hasRequiredFields = false;
 
-  CreateTaskListRequest._() : super();
-  factory CreateTaskListRequest({
-    $1.TaskList? tasklist,
+  CreateTaskRequest._() : super();
+  factory CreateTaskRequest({
+    $core.String? parent,
+    $1.Task? task,
   }) {
     final _result = create();
-    if (tasklist != null) {
-      _result.tasklist = tasklist;
+    if (parent != null) {
+      _result.parent = parent;
+    }
+    if (task != null) {
+      _result.task = task;
     }
     return _result;
   }
-  factory CreateTaskListRequest.fromBuffer($core.List<$core.int> i,
+  factory CreateTaskRequest.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory CreateTaskListRequest.fromJson($core.String i,
+  factory CreateTaskRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  CreateTaskListRequest clone() =>
-      CreateTaskListRequest()..mergeFromMessage(this);
+  CreateTaskRequest clone() => CreateTaskRequest()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  CreateTaskListRequest copyWith(
-          void Function(CreateTaskListRequest) updates) =>
-      super.copyWith((message) => updates(message as CreateTaskListRequest))
-          as CreateTaskListRequest; // ignore: deprecated_member_use
+  CreateTaskRequest copyWith(void Function(CreateTaskRequest) updates) =>
+      super.copyWith((message) => updates(message as CreateTaskRequest))
+          as CreateTaskRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static CreateTaskListRequest create() => CreateTaskListRequest._();
-  CreateTaskListRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateTaskListRequest> createRepeated() =>
-      $pb.PbList<CreateTaskListRequest>();
+  static CreateTaskRequest create() => CreateTaskRequest._();
+  CreateTaskRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateTaskRequest> createRepeated() =>
+      $pb.PbList<CreateTaskRequest>();
   @$core.pragma('dart2js:noInline')
-  static CreateTaskListRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreateTaskListRequest>(create);
-  static CreateTaskListRequest? _defaultInstance;
+  static CreateTaskRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateTaskRequest>(create);
+  static CreateTaskRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get parent => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set parent($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasParent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParent() => clearField(1);
 
   @$pb.TagNumber(3)
-  $1.TaskList get tasklist => $_getN(0);
+  $1.Task get task => $_getN(1);
   @$pb.TagNumber(3)
-  set tasklist($1.TaskList v) {
+  set task($1.Task v) {
     setField(3, v);
   }
 
   @$pb.TagNumber(3)
-  $core.bool hasTasklist() => $_has(0);
+  $core.bool hasTask() => $_has(1);
   @$pb.TagNumber(3)
-  void clearTasklist() => clearField(3);
+  void clearTask() => clearField(3);
   @$pb.TagNumber(3)
-  $1.TaskList ensureTasklist() => $_ensure(0);
+  $1.Task ensureTask() => $_ensure(1);
 }
 
-class UpdateTaskListRequest extends $pb.GeneratedMessage {
+class UpdateTaskRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'UpdateTaskListRequest',
+          : 'UpdateTaskRequest',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
               : 'todart.v1alpha.services'),
       createEmptyInstance: create)
-    ..aOM<$1.TaskList>(
+    ..aOM<$1.Task>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'tasklist',
-        subBuilder: $1.TaskList.create)
+            : 'task',
+        subBuilder: $1.Task.create)
     ..aOM<$3.FieldMask>(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -348,62 +385,60 @@ class UpdateTaskListRequest extends $pb.GeneratedMessage {
         subBuilder: $3.FieldMask.create)
     ..hasRequiredFields = false;
 
-  UpdateTaskListRequest._() : super();
-  factory UpdateTaskListRequest({
-    $1.TaskList? tasklist,
+  UpdateTaskRequest._() : super();
+  factory UpdateTaskRequest({
+    $1.Task? task,
     $3.FieldMask? updateMask,
   }) {
     final _result = create();
-    if (tasklist != null) {
-      _result.tasklist = tasklist;
+    if (task != null) {
+      _result.task = task;
     }
     if (updateMask != null) {
       _result.updateMask = updateMask;
     }
     return _result;
   }
-  factory UpdateTaskListRequest.fromBuffer($core.List<$core.int> i,
+  factory UpdateTaskRequest.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory UpdateTaskListRequest.fromJson($core.String i,
+  factory UpdateTaskRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  UpdateTaskListRequest clone() =>
-      UpdateTaskListRequest()..mergeFromMessage(this);
+  UpdateTaskRequest clone() => UpdateTaskRequest()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  UpdateTaskListRequest copyWith(
-          void Function(UpdateTaskListRequest) updates) =>
-      super.copyWith((message) => updates(message as UpdateTaskListRequest))
-          as UpdateTaskListRequest; // ignore: deprecated_member_use
+  UpdateTaskRequest copyWith(void Function(UpdateTaskRequest) updates) =>
+      super.copyWith((message) => updates(message as UpdateTaskRequest))
+          as UpdateTaskRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static UpdateTaskListRequest create() => UpdateTaskListRequest._();
-  UpdateTaskListRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateTaskListRequest> createRepeated() =>
-      $pb.PbList<UpdateTaskListRequest>();
+  static UpdateTaskRequest create() => UpdateTaskRequest._();
+  UpdateTaskRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateTaskRequest> createRepeated() =>
+      $pb.PbList<UpdateTaskRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateTaskListRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateTaskListRequest>(create);
-  static UpdateTaskListRequest? _defaultInstance;
+  static UpdateTaskRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateTaskRequest>(create);
+  static UpdateTaskRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $1.TaskList get tasklist => $_getN(0);
+  $1.Task get task => $_getN(0);
   @$pb.TagNumber(1)
-  set tasklist($1.TaskList v) {
+  set task($1.Task v) {
     setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasTasklist() => $_has(0);
+  $core.bool hasTask() => $_has(0);
   @$pb.TagNumber(1)
-  void clearTasklist() => clearField(1);
+  void clearTask() => clearField(1);
   @$pb.TagNumber(1)
-  $1.TaskList ensureTasklist() => $_ensure(0);
+  $1.Task ensureTask() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $3.FieldMask get updateMask => $_getN(1);
@@ -420,11 +455,11 @@ class UpdateTaskListRequest extends $pb.GeneratedMessage {
   $3.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
-class DeleteTaskListRequest extends $pb.GeneratedMessage {
+class DeleteTaskRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'DeleteTaskListRequest',
+          : 'DeleteTaskRequest',
       package: const $pb.PackageName(
           $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -437,8 +472,8 @@ class DeleteTaskListRequest extends $pb.GeneratedMessage {
             : 'name')
     ..hasRequiredFields = false;
 
-  DeleteTaskListRequest._() : super();
-  factory DeleteTaskListRequest({
+  DeleteTaskRequest._() : super();
+  factory DeleteTaskRequest({
     $core.String? name,
   }) {
     final _result = create();
@@ -447,34 +482,32 @@ class DeleteTaskListRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory DeleteTaskListRequest.fromBuffer($core.List<$core.int> i,
+  factory DeleteTaskRequest.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory DeleteTaskListRequest.fromJson($core.String i,
+  factory DeleteTaskRequest.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  DeleteTaskListRequest clone() =>
-      DeleteTaskListRequest()..mergeFromMessage(this);
+  DeleteTaskRequest clone() => DeleteTaskRequest()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  DeleteTaskListRequest copyWith(
-          void Function(DeleteTaskListRequest) updates) =>
-      super.copyWith((message) => updates(message as DeleteTaskListRequest))
-          as DeleteTaskListRequest; // ignore: deprecated_member_use
+  DeleteTaskRequest copyWith(void Function(DeleteTaskRequest) updates) =>
+      super.copyWith((message) => updates(message as DeleteTaskRequest))
+          as DeleteTaskRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static DeleteTaskListRequest create() => DeleteTaskListRequest._();
-  DeleteTaskListRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteTaskListRequest> createRepeated() =>
-      $pb.PbList<DeleteTaskListRequest>();
+  static DeleteTaskRequest create() => DeleteTaskRequest._();
+  DeleteTaskRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteTaskRequest> createRepeated() =>
+      $pb.PbList<DeleteTaskRequest>();
   @$core.pragma('dart2js:noInline')
-  static DeleteTaskListRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DeleteTaskListRequest>(create);
-  static DeleteTaskListRequest? _defaultInstance;
+  static DeleteTaskRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteTaskRequest>(create);
+  static DeleteTaskRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
