@@ -8,13 +8,15 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+
 @$core.Deprecated('Use counterDescriptor instead')
-const Counter$json = const {
+const Counter$json = {
   '1': 'Counter',
-  '2': const [
-    const {'1': 'total', '3': 1, '4': 1, '5': 5, '10': 'total'},
+  '2': [
+    {'1': 'total', '3': 1, '4': 1, '5': 5, '10': 'total'},
   ],
 };
 
 /// Descriptor for `Counter`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List counterDescriptor = $convert.base64Decode('CgdDb3VudGVyEhQKBXRvdGFsGAEgASgFUgV0b3RhbA==');
+final $typed_data.Uint8List counterDescriptor =
+    $convert.base64Decode('CgdDb3VudGVyEhQKBXRvdGFsGAEgASgFUgV0b3RhbA==');

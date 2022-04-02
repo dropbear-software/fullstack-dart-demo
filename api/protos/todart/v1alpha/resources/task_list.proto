@@ -7,5 +7,5 @@ package todart.v1alpha.resources;
 // A container to hold individual Tasks
 message TaskList {
   // The name of the TaskList
-  string title = 4;
+  string title = 1;
 }

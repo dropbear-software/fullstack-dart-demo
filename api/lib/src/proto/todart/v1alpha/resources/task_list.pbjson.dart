@@ -8,13 +8,15 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+
 @$core.Deprecated('Use taskListDescriptor instead')
-const TaskList$json = const {
+const TaskList$json = {
   '1': 'TaskList',
-  '2': const [
-    const {'1': 'title', '3': 4, '4': 1, '5': 9, '10': 'title'},
+  '2': [
+    {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
   ],
 };
 
 /// Descriptor for `TaskList`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List taskListDescriptor = $convert.base64Decode('CghUYXNrTGlzdBIUCgV0aXRsZRgEIAEoCVIFdGl0bGU=');
+final $typed_data.Uint8List taskListDescriptor =
+    $convert.base64Decode('CghUYXNrTGlzdBIUCgV0aXRsZRgBIAEoCVIFdGl0bGU=');
