@@ -13,7 +13,7 @@
         "build"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/pkg/counter_api"
+        "cwd": "${workspaceFolder}/api"
       },
       "group": "build",
       "presentation": {

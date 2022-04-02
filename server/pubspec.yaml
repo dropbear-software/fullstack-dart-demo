@@ -11,7 +11,7 @@ environment:
 
 dependencies:
   counter_api: 
-    path: ../pkg/counter_api
+    path: ../api
 
 
 dev_dependencies:

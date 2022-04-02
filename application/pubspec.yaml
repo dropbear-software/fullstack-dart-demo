@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   counter_api: 
-    path: ../pkg/counter_api
+    path: ../api
 
 
   # The following adds the Cupertino Icons font to your application.

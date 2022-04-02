@@ -53,7 +53,7 @@ packages:
   counter_api:
     dependency: "direct main"
     description:
-      path: "../pkg/counter_api"
+      path: "../api"
       relative: true
     source: path
     version: "1.0.0"

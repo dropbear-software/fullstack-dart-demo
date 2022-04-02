@@ -3,8 +3,8 @@
       "path": "/home/vscode/.local/bin/protoc",
       "compile_on_save": true,
       "options": [
-          "--proto_path=${workspaceRoot}/pkg/counter_api/protos",
-          "--dart_out=grpc:${workspaceRoot}/pkg/counter_api/lib/src/proto"
+          "--proto_path=${workspaceRoot}/api/protos",
+          "--dart_out=grpc:${workspaceRoot}/api/lib/src/proto"
       ]
   }
 }
