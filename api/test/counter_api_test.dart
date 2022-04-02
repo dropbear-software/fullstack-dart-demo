@@ -1,4 +1,3 @@
-import 'package:counter_api/counter_api.dart';
 import 'package:test/test.dart';
 
 void main() {
