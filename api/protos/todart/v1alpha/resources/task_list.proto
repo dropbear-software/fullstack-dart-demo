@@ -1,0 +1,11 @@
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+
+syntax = "proto3";
+
+package todart.v1alpha.resources;
+
+// A container to hold individual Tasks
+message TaskList {
+  // The name of the TaskList
+  string title = 4;
+}

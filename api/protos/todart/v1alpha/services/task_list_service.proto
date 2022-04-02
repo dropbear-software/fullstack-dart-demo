@@ -1,0 +1,102 @@
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+
+syntax = "proto3";
+
+package todart.v1alpha.services;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+import "todart/v1alpha/resources/task_list.proto";
+
+// REST interface for working with a TaskList resource or collection
+service TaskListService {
+  // See https://google.aip.dev/132
+  rpc ListTaskLists(ListTaskListsRequest) returns (ListTaskListsResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/tasklists"
+    };
+  }
+
+  // See https://google.aip.dev/131
+  rpc GetTaskList(GetTaskListRequest) returns (todart.v1alpha.resources.TaskList) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=tasklists/*}"
+    };
+  }
+
+  // See https://google.aip.dev/133
+  rpc CreateTaskList(CreateTaskListRequest) returns (todart.v1alpha.resources.TaskList) {
+    option (google.api.http) = {
+      post: "/v1alpha1/tasklists"
+      body: "tasklist"
+    };
+  }
+
+  // See https://google.aip.dev/134
+  rpc UpdateTaskList(UpdateTaskListRequest) returns (todart.v1alpha.resources.TaskList) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{tasklist.name=tasklists/*}"
+      body: "tasklist"
+    };
+  }
+
+  // See https://google.aip.dev/135
+  rpc DeleteTaskList(DeleteTaskListRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=tasklists/*}"
+    };
+  }
+}
+
+message ListTaskListsRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListTaskListsResponse {
+  // The field name should match the noun "tasklist" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated todart.v1alpha.resources.TaskList tasklists = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetTaskListRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateTaskListRequest {
+  // The parent resource name where the tasklist is to be created.
+  string parent = 1;
+
+  // The tasklist id to use for this tasklist.
+  string tasklist_id = 2;
+
+  // The tasklist resource to create.
+  // The field name should match the Noun in the method name.
+  todart.v1alpha.resources.TaskList tasklist = 3;
+}
+
+message UpdateTaskListRequest {
+  // The tasklist resource which replaces the resource on the server.
+  todart.v1alpha.resources.TaskList tasklist = 1;
+
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteTaskListRequest {
+  // The resource name of the tasklist to be deleted.
+  string name = 1;
+}
