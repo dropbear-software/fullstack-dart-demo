@@ -13,9 +13,11 @@ Future<void> main() async {
 
   try {
     var result = await client.createTaskList(request);
-    print('Task list created with title: ${result.title}');
+    print('Task list created with title: ${result.title} and id: ${result.id}');
   } catch (error) {
     print('An error occured');
     print(error);
+  } finally {
+    channel.shutdown();
   }
 }

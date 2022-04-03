@@ -9,9 +9,6 @@ class CreateTaskListService {
   CreateTaskListService(this._taskListRepository);
 
   TaskListEntity execute(TaskList taskList) {
-    final identity = _taskListRepository.nextIdentity();
-    final result = taskList.freeze();
-    result.toProto3Json();
-    throw UnimplementedError();
+    return _taskListRepository.createTaskList(taskList);
   }
 }
