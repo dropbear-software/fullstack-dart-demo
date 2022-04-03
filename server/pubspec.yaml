@@ -1,4 +1,4 @@
-name: api_server
+name: todart_server
 description: A sample command-line application.
 version: 1.0.0
 # Prevent accidental publishing to pub.dev.
@@ -10,7 +10,7 @@ environment:
 
 
 dependencies:
-  counter_api: 
+  todart_api: 
     path: ../api
 
 

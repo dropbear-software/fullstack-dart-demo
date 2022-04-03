@@ -1,4 +1,4 @@
-import 'package:counter_api/counter_api.dart';
+import 'package:todart_api/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:todart/api_client.dart';
 
@@ -53,19 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   Future<void> _incrementCounter() async {
-    try {
-      final result = await ApiClient.client.increaseCount(Empty());
-      setState(() {
-        // This call to setState tells the Flutter framework that something has
-        // changed in this State, which causes it to rerun the build method below
-        // so that the display can reflect the updated values. If we changed
-        // _counter without calling setState(), then the build method would not be
-        // called again, and so nothing would appear to happen.
-        _counter = result.total;
-      });
-    } catch (e) {
-      print(e);
-    }
+    // try {
+    //   final result = await ApiClient.client.increaseCount(Empty());
+    //   setState(() {
+    //     // This call to setState tells the Flutter framework that something has
+    //     // changed in this State, which causes it to rerun the build method below
+    //     // so that the display can reflect the updated values. If we changed
+    //     // _counter without calling setState(), then the build method would not be
+    //     // called again, and so nothing would appear to happen.
+    //     _counter = result.total;
+    //   });
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   @override

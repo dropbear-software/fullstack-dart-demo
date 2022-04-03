@@ -1,4 +1,4 @@
-import 'package:counter_api/api_client.dart';
+import 'package:todart_api/api_client.dart';
 import 'package:grpc/grpc.dart';
 
 Future<void> main() async {
