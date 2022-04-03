@@ -1,8 +1,15 @@
+import 'package:todart_api/api_server.dart';
+
 import 'task_list_entity.dart';
 
 abstract class TaskListRepository {
   String nextIdentity();
-  void save(TaskListEntity tasklist);
 
-  TaskListEntity getById(String id);
+  TaskListEntity createTaskList(TaskList list);
+
+  Iterable<TaskList> listTaskLists();
+
+  TaskList getTaskList(String taskListId);
+
+  void deleteTaskList(String taskListId);
 }

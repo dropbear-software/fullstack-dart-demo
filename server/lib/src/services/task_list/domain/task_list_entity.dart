@@ -1,9 +1,17 @@
-import '../../../extractable/domain_event.dart';
-import '../../../extractable/entity_identifier.dart';
+import 'package:built_value/built_value.dart';
+import 'package:todart_api/api_server.dart';
+import 'package:todart_server/src/extractable/uuid.dart';
 
-class TaskListEntity {
-  late final EntityIdentifier id;
-  final List<DomainEvent> _events = [];
+part 'task_list_entity.g.dart';
 
-  TaskListEntity();
+abstract class TaskListEntity
+    implements Built<TaskListEntity, TaskListEntityBuilder> {
+  TaskListEntity._();
+
+  factory TaskListEntity([void Function(TaskListEntityBuilder b) updates]) =
+      _$TaskListEntity;
+
+  String get id;
+
+  TaskList get taskList;
 }

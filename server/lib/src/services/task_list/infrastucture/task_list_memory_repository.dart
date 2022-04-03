@@ -1,21 +1,61 @@
+import 'dart:collection';
+import 'package:grpc/grpc.dart' show GrpcError;
+
+import 'package:todart_api/api_server.dart';
+
+import '../../../extractable/uuid.dart';
 import '../domain/task_list_entity.dart';
 import '../domain/task_list_repository.dart';
 
 class TaskListMemoryRepository implements TaskListRepository {
-  @override
-  TaskListEntity getById(String id) {
-    // TODO: implement getById
-    throw UnimplementedError();
-  }
+  final _taskLists = HashMap<String, _TaskListInfo>();
 
   @override
   String nextIdentity() {
-    // TODO: implement nextIdentity
-    throw UnimplementedError();
+    return Uuid().generateV4();
   }
 
   @override
-  void save(TaskListEntity tasklist) {
-    // TODO: implement save
+  TaskListEntity createTaskList(TaskList list) {
+    list.id = nextIdentity();
+    _taskLists.putIfAbsent(list.id, () => _TaskListInfo(list));
+
+    return TaskListEntity((b) => b
+      ..id = list.id
+      ..taskList = list);
   }
+
+  @override
+  void deleteTaskList(String taskListId) {
+    final result = _taskLists.remove(taskListId);
+    if (result == null) {
+      throw GrpcError.notFound();
+    }
+  }
+
+  @override
+  TaskList getTaskList(String taskListId) {
+    final result = _taskLists[taskListId];
+
+    if (result == null) {
+      throw GrpcError.notFound();
+    }
+
+    return result.taskList;
+  }
+
+  @override
+  Iterable<TaskList> listTaskLists() {
+    final result = List<_TaskListInfo>.unmodifiable(_taskLists.values);
+    final taskLists = result.map((element) => element.taskList);
+
+    return taskLists;
+  }
+}
+
+class _TaskListInfo {
+  late final TaskList taskList;
+  final _tasks = HashMap<String, Task>();
+
+  _TaskListInfo(this.taskList);
 }
