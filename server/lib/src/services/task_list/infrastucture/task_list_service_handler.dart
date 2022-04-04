@@ -3,9 +3,12 @@ import 'package:todart_api/api_server.dart';
 import 'package:todart_server/src/services/task_list/application/services/create_task_list_service.dart';
 import 'package:todart_server/src/services/task_list/application/services/get_task_list_service.dart';
 
+import '../application/services/delete_task_list_service.dart';
+
 class TaskListServiceHandler extends TaskListServiceBase {
   final _createTaskListService = CreateTaskListService();
   final _getTaskListService = GetTaskListService();
+  final _deleteTaskListService = DeleteTaskListService();
 
   @override
   Future<TaskList> createTaskList(
@@ -17,8 +20,8 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<Empty> deleteTaskList(
       ServiceCall call, DeleteTaskListRequest request) {
-    // TODO: implement deleteTaskList
-    throw UnimplementedError();
+    _deleteTaskListService(request.name);
+    return Future.value(Empty());
   }
 
   @override
