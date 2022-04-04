@@ -1,13 +1,13 @@
 import 'package:todart_api/api_server.dart';
+import 'package:todart_server/src/service_locator.dart';
 
 import '../../domain/task_list_repository.dart';
 
 class GetTaskListService {
-  late final TaskListRepository _taskListRepository;
+  final TaskListRepository _taskListRepository =
+      serviceLocator<TaskListRepository>();
 
-  GetTaskListService(this._taskListRepository);
-
-  TaskList execute(String taskListId) {
+  TaskList call(String taskListId) {
     return _taskListRepository.getTaskList(taskListId);
   }
 }

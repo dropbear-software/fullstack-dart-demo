@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:grpc/grpc.dart' as grpc;
-import 'package:todart_server/src/infrastucture_layer.dart';
+import 'src/infrastucture_layer.dart';
 
 class Server {
   static final int defaultPort = 50002;
