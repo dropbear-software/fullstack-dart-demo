@@ -1,5 +1,5 @@
 import 'package:todart_api/api_server.dart';
-import 'package:todart_server/src/service_locator.dart';
+import 'package:todart_server/src/shared/service_locator.dart';
 
 import '../../domain/task_list_repository.dart';
 

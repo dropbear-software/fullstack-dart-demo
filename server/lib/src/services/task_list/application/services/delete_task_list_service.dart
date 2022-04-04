@@ -1,4 +1,4 @@
-import '../../../../service_locator.dart';
+import '../../../../shared/service_locator.dart';
 import '../../domain/task_list_repository.dart';
 
 class DeleteTaskListService {

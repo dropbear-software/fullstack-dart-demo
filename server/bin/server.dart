@@ -1,5 +1,5 @@
 import 'package:todart_server/api_server.dart' as api_server;
-import 'package:todart_server/src/service_locator.dart';
+import 'package:todart_server/src/shared/service_locator.dart';
 
 Future<void> main(List<String> args) async {
   setup();
