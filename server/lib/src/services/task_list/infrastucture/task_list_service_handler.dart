@@ -1,11 +1,14 @@
 import 'package:grpc/service_api.dart';
 import 'package:todart_api/api_server.dart';
 import 'package:todart_server/src/services/task_list/application/services/create_task_list_service.dart';
+import 'package:todart_server/src/services/task_list/application/services/get_task_list_service.dart';
 import 'package:todart_server/src/services/task_list/infrastucture/task_list_memory_repository.dart';
 
 class TaskListServiceHandler extends TaskListServiceBase {
   final CreateTaskListService _createTaskListService =
       CreateTaskListService(TaskListMemoryRepository());
+  final GetTaskListService _getTaskListService =
+      GetTaskListService(TaskListMemoryRepository());
 
   @override
   Future<TaskList> createTaskList(
@@ -23,8 +26,8 @@ class TaskListServiceHandler extends TaskListServiceBase {
 
   @override
   Future<TaskList> getTaskList(ServiceCall call, GetTaskListRequest request) {
-    // TODO: implement getTaskList
-    throw UnimplementedError();
+    final result = _getTaskListService.execute(request.name);
+    return Future.value(result);
   }
 
   @override

@@ -8,7 +8,7 @@ import '../domain/task_list_entity.dart';
 import '../domain/task_list_repository.dart';
 
 class TaskListMemoryRepository implements TaskListRepository {
-  final _taskLists = HashMap<String, _TaskListInfo>();
+  static final _taskLists = HashMap<String, _TaskListInfo>();
 
   @override
   String nextIdentity() {
@@ -19,7 +19,6 @@ class TaskListMemoryRepository implements TaskListRepository {
   TaskListEntity createTaskList(TaskList list) {
     list.id = nextIdentity();
     _taskLists.putIfAbsent(list.id, () => _TaskListInfo(list));
-
     return TaskListEntity((b) => b
       ..id = list.id
       ..taskList = list);
@@ -35,6 +34,12 @@ class TaskListMemoryRepository implements TaskListRepository {
 
   @override
   TaskList getTaskList(String taskListId) {
+    if (_taskLists.containsKey(taskListId)) {
+      print('Its there');
+    } else {
+      print('Its not there');
+    }
+
     final result = _taskLists[taskListId];
 
     if (result == null) {
