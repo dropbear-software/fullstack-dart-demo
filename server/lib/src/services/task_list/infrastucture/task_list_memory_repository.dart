@@ -34,12 +34,6 @@ class TaskListMemoryRepository implements TaskListRepository {
 
   @override
   TaskList getTaskList(String taskListId) {
-    if (_taskLists.containsKey(taskListId)) {
-      print('Its there');
-    } else {
-      print('Its not there');
-    }
-
     final result = _taskLists[taskListId];
 
     if (result == null) {
