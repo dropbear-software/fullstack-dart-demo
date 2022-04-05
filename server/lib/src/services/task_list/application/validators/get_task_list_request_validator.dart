@@ -30,7 +30,7 @@ extension Validator on ListTaskListsRequest {
     // If the user specifies a negative value for page_size, the API must
     // send an INVALID_ARGUMENT error.
     if (pageSize.isNegative) {
-      throw GrpcError.invalidArgument();
+      throw GrpcError.invalidArgument('pageSize can not be less than 0');
     }
   }
 }
