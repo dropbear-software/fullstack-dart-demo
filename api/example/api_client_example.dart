@@ -19,6 +19,9 @@ Future<void> main() async {
 
     print('Now lets fetch all of the task lists');
     await _listTaskListsDemo();
+
+    print('Now lets make use of pagination to fetch task lists');
+    await _paginateTaskListsDemo();
   } catch (error) {
     print('An error occured \n $error');
   } finally {
@@ -63,5 +66,25 @@ Future<Iterable<TaskList>> _listTaskListsDemo() async {
   for (var taskList in response.tasklists) {
     print('Task List id: ${taskList.id} title: ${taskList.title}');
   }
+  print(response.nextPageToken);
   return response.tasklists;
+}
+
+_paginateTaskListsDemo() async {
+  final request = ListTaskListsRequest(pageSize: 1);
+  final response = await client.listTaskLists(request);
+  print('Fetched a total of ${response.tasklists.length} task lists');
+  for (var taskList in response.tasklists) {
+    print('Task List id: ${taskList.id} title: ${taskList.title}');
+  }
+
+  print('Now lets fetch the next set of results using our page token');
+  final newRequest =
+      ListTaskListsRequest(pageSize: 1, pageToken: response.nextPageToken);
+
+  final newResponse = await client.listTaskLists(newRequest);
+  print('Fetched a total of ${newResponse.tasklists.length} task lists');
+  for (var taskList in newResponse.tasklists) {
+    print('Task List id: ${taskList.id} title: ${taskList.title}');
+  }
 }

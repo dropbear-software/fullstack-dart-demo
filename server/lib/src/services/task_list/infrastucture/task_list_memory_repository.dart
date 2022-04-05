@@ -44,11 +44,20 @@ class TaskListMemoryRepository implements TaskListRepository {
   }
 
   @override
-  Iterable<TaskList> listTaskLists() {
-    final result = List<_TaskListInfo>.unmodifiable(_taskLists.values);
-    final taskLists = result.map((element) => element.taskList);
+  Iterable<TaskList> listTaskLists(ListTaskListsRequest request) {
+    int startSearchingFromPosition = 0;
 
-    return taskLists;
+    // First convert the HashMap into something ordered (Potential Bug here)
+    // How would we ever consistently get the same order in this variable?
+    final result = List<_TaskListInfo>.unmodifiable(_taskLists.values);
+
+    // TODO: Figure out how to know which position to start searching from
+
+    final taskLists = result
+        .sublist(startSearchingFromPosition)
+        .map((element) => element.taskList);
+
+    return taskLists.take(request.pageSize);
   }
 }
 

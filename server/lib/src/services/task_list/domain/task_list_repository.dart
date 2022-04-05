@@ -7,7 +7,7 @@ abstract class TaskListRepository {
 
   TaskListEntity createTaskList(TaskList list);
 
-  Iterable<TaskList> listTaskLists();
+  Iterable<TaskList> listTaskLists(ListTaskListsRequest request);
 
   TaskList getTaskList(String taskListId);
 

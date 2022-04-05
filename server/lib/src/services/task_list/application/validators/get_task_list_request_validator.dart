@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:todart_api/api_server.dart';
 import 'package:grpc/grpc.dart' show GrpcError;
 
@@ -5,6 +7,7 @@ import 'package:grpc/grpc.dart' show GrpcError;
 extension Validator on ListTaskListsRequest {
   void validate() {
     _validatePageSize();
+    _validatePageToken();
   }
 
   void _validatePageSize() {
@@ -31,6 +34,23 @@ extension Validator on ListTaskListsRequest {
     // send an INVALID_ARGUMENT error.
     if (pageSize.isNegative) {
       throw GrpcError.invalidArgument('pageSize can not be less than 0');
+    }
+  }
+
+  // The pageToken should tell us what record in the database to start
+  // searching from. We passed that information to them previously assuming
+  // the field is not empty, but did so by originally converting a
+  // ListTaskListsRequest to binary and then converting it to base64
+  // So now we do that process in reverse to figure out the record id
+  void _validatePageToken() {
+    if (pageToken.isNotEmpty) {
+      try {
+        final suppliedNextPageToken =
+            ListTaskListsRequest.fromBuffer(base64Decode(pageToken));
+        pageToken = suppliedNextPageToken.pageToken;
+      } catch (e) {
+        throw GrpcError.invalidArgument('invalid pageToken provided');
+      }
     }
   }
 }

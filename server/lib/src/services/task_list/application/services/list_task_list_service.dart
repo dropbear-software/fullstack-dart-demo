@@ -7,7 +7,7 @@ class ListTaskListService {
   final TaskListRepository _taskListRepository =
       serviceLocator<TaskListRepository>();
 
-  Iterable<TaskList> call() {
-    return _taskListRepository.listTaskLists();
+  Iterable<TaskList> call(ListTaskListsRequest request) {
+    return _taskListRepository.listTaskLists(request);
   }
 }

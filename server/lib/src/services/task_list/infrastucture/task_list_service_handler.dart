@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:grpc/service_api.dart';
 import 'package:todart_api/api_server.dart';
 import 'package:todart_server/src/shared/logger.dart';
@@ -33,13 +35,24 @@ class TaskListServiceHandler extends TaskListServiceBase {
     return Future.value(result);
   }
 
+  /// See https://google.aip.dev/158 for guidance on Pagination
   @override
   Future<ListTaskListsResponse> listTaskLists(
       ServiceCall call, ListTaskListsRequest request) {
     request.validate();
-    final taskLists = _listTaskListsService();
+
+    final taskLists = _listTaskListsService(request);
     log.info('Fetched all task lists');
-    final result = ListTaskListsResponse(tasklists: taskLists);
+
+    // Tell it the record it should start searching from next time
+    final nextPageToken = ListTaskListsRequest(
+        pageSize: request.pageSize, pageToken: taskLists.last.id);
+    // Encode it in a Base64 encoded binary representation so clients
+    // can't easily reverse engineer it. Longer term we should sign
+    // the nextPageToken to get some cryptographically valid guarantees
+    final result = ListTaskListsResponse(
+        tasklists: taskLists,
+        nextPageToken: base64.encode(nextPageToken.writeToBuffer()));
     return Future.value(result);
   }
 
