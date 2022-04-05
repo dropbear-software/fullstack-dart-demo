@@ -51,7 +51,10 @@ service TaskListService {
 }
 
 message ListTaskListsRequest {
-  // The maximum number of items to return.
+  // The maximum number of items to return. The service may return fewer than
+  // this value.
+  // If unspecified, at most 50 books will be returned.
+  // The maximum value is 200; values above 200 will be coerced to 200.
   int32 page_size = 2;
 
   // The next_page_token value returned from a previous List request, if any.

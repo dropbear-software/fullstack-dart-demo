@@ -1,11 +1,8 @@
 import 'package:grpc/service_api.dart';
 import 'package:todart_api/api_server.dart';
-import 'package:todart_server/src/services/task_list/application/services/create_task_list_service.dart';
-import 'package:todart_server/src/services/task_list/application/services/get_task_list_service.dart';
-import 'package:todart_server/src/services/task_list/application/services/list_task_list_service.dart';
 import 'package:todart_server/src/shared/logger.dart';
-
-import '../application/services/delete_task_list_service.dart';
+import 'package:todart_server/src/services/task_list/application/services.dart';
+import 'package:todart_server/src/services/task_list/application/validators.dart';
 
 class TaskListServiceHandler extends TaskListServiceBase {
   final _createTaskListService = CreateTaskListService();
@@ -39,6 +36,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<ListTaskListsResponse> listTaskLists(
       ServiceCall call, ListTaskListsRequest request) {
+    request.validate();
     final taskLists = _listTaskListsService();
     log.info('Fetched all task lists');
     final result = ListTaskListsResponse(tasklists: taskLists);
