@@ -12,4 +12,6 @@ abstract class TaskListRepository {
   TaskList getTaskList(String taskListId);
 
   void deleteTaskList(String taskListId);
+
+  TaskList updateTaskList(TaskList taskList);
 }

@@ -57,6 +57,12 @@ class TaskListMemoryRepository implements TaskListRepository {
   }
 
   @override
+  TaskList updateTaskList(TaskList taskList) {
+    _database.taskLists[taskList.id] = taskList;
+    return taskList;
+  }
+
+  @override
   String nextIdentity() {
     return Uuid().generateV4();
   }

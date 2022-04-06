@@ -22,11 +22,28 @@ Future<void> main() async {
 
     print('Now lets make use of pagination to fetch task lists');
     await _paginateTaskListsDemo();
+
+    print('Finally, lets update an existing resource');
+    await _updateTaskListDemo(createResponse.last);
   } catch (error) {
     print('An error occured \n $error');
   } finally {
     channel.shutdown();
   }
+}
+
+_updateTaskListDemo(TaskList taskList) async {
+  print(
+      'Preparing to update TaskList title: ${taskList.title} name: ${taskList.name} id: ${taskList.id}');
+  final request = UpdateTaskListRequest(
+      tasklist: TaskList(
+          id: taskList.id, title: 'Books to Read', name: 'Should not update'),
+      updateMask: FieldMask(paths: ['title']));
+
+  final response = await client.updateTaskList(request);
+
+  print(
+      'TaskList updated with title: ${response.title} name: ${response.name} id: ${response.id}');
 }
 
 Future<List<TaskList>> _createTaskListDemo() async {

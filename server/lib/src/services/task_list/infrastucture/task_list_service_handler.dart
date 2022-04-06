@@ -11,6 +11,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   final _getTaskListService = GetTaskListService();
   final _deleteTaskListService = DeleteTaskListService();
   final _listTaskListsService = ListTaskListService();
+  final _updateTaskListService = UpdateTaskListService();
 
   @override
   Future<TaskList> createTaskList(
@@ -42,7 +43,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
     request.validate();
 
     final taskLists = _listTaskListsService(request);
-    log.info('Fetched all task lists');
+    log.info('Fetched ${taskLists.length} task lists');
 
     // Tell it the record it should start searching from next time
     final nextPageToken = ListTaskListsRequest(
@@ -59,7 +60,8 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<TaskList> updateTaskList(
       ServiceCall call, UpdateTaskListRequest request) {
-    // TODO: implement updateTaskList
-    throw UnimplementedError();
+    final result = _updateTaskListService(request);
+    log.info('Updated TaskList with id ${result.id}');
+    return Future.value(result);
   }
 }
