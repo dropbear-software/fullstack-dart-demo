@@ -66,7 +66,7 @@ Future<Iterable<TaskList>> _listTaskListsDemo() async {
   for (var taskList in response.tasklists) {
     print('Task List id: ${taskList.id} title: ${taskList.title}');
   }
-  print(response.nextPageToken);
+  print('\n');
   return response.tasklists;
 }
 

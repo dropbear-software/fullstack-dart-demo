@@ -8,17 +8,12 @@ import '../domain/task_list_entity.dart';
 import '../domain/task_list_repository.dart';
 
 class TaskListMemoryRepository implements TaskListRepository {
-  static final _taskLists = HashMap<String, _TaskListInfo>();
-
-  @override
-  String nextIdentity() {
-    return Uuid().generateV4();
-  }
+  static final _database = _Database();
 
   @override
   TaskListEntity createTaskList(TaskList list) {
     list.id = nextIdentity();
-    _taskLists.putIfAbsent(list.id, () => _TaskListInfo(list));
+    _database.taskLists.putIfAbsent(list.id, () => list);
     return TaskListEntity((b) => b
       ..id = list.id
       ..taskList = list);
@@ -26,7 +21,7 @@ class TaskListMemoryRepository implements TaskListRepository {
 
   @override
   void deleteTaskList(String taskListId) {
-    final result = _taskLists.remove(taskListId);
+    final result = _database.taskLists.remove(taskListId);
     if (result == null) {
       throw GrpcError.notFound();
     }
@@ -34,36 +29,41 @@ class TaskListMemoryRepository implements TaskListRepository {
 
   @override
   TaskList getTaskList(String taskListId) {
-    final result = _taskLists[taskListId];
+    final result = _database.taskLists[taskListId];
 
     if (result == null) {
       throw GrpcError.notFound();
     }
 
-    return result.taskList;
+    return result;
   }
 
   @override
   Iterable<TaskList> listTaskLists(ListTaskListsRequest request) {
-    int startSearchingFromPosition = 0;
+    if (request.pageToken.isNotEmpty) {
+      // TODO: Consider checking if the pageToken matches any values at all
+      // before attempting to return anything
 
-    // First convert the HashMap into something ordered (Potential Bug here)
-    // How would we ever consistently get the same order in this variable?
-    final result = List<_TaskListInfo>.unmodifiable(_taskLists.values);
+      // Get the taskLists from the "database" and don't start counting until
+      // you find one where the id matches the pageToken then only
+      // take as many as specified by the `request.pageSize`
+      return _database.taskLists.values
+          .skipWhile((value) => value.id == request.pageToken)
+          .take(request.pageSize);
+    } else {
+      // Start from the start but only return as many as requested
+      return _database.taskLists.values.take(request.pageSize);
+    }
+  }
 
-    // TODO: Figure out how to know which position to start searching from
-
-    final taskLists = result
-        .sublist(startSearchingFromPosition)
-        .map((element) => element.taskList);
-
-    return taskLists.take(request.pageSize);
+  @override
+  String nextIdentity() {
+    return Uuid().generateV4();
   }
 }
 
-class _TaskListInfo {
-  late final TaskList taskList;
-  final _tasks = HashMap<String, Task>();
-
-  _TaskListInfo(this.taskList);
+class _Database {
+  final LinkedHashMap<String, TaskList> taskLists =
+      LinkedHashMap<String, TaskList>();
+  final LinkedHashMap<String, Task> tasks = LinkedHashMap<String, Task>();
 }
