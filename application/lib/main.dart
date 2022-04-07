@@ -1,6 +1,4 @@
-import 'package:todart_api/api_client.dart';
 import 'package:flutter/material.dart';
-import 'package:todart/api_client.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +48,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final int _counter = 0;
 
   Future<void> _incrementCounter() async {
     // try {

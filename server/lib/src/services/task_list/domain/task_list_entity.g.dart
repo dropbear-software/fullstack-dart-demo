@@ -13,7 +13,7 @@ class _$TaskListEntity extends TaskListEntity {
   final TaskList taskList;
 
   factory _$TaskListEntity([void Function(TaskListEntityBuilder)? updates]) =>
-      (new TaskListEntityBuilder()..update(updates)).build();
+      (TaskListEntityBuilder()..update(updates)).build();
 
   _$TaskListEntity._({required this.id, required this.taskList}) : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'TaskListEntity', 'id');
@@ -26,8 +26,7 @@ class _$TaskListEntity extends TaskListEntity {
       (toBuilder()..update(updates)).build();
 
   @override
-  TaskListEntityBuilder toBuilder() =>
-      new TaskListEntityBuilder()..replace(this);
+  TaskListEntityBuilder toBuilder() => TaskListEntityBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -89,7 +88,7 @@ class TaskListEntityBuilder
   @override
   _$TaskListEntity build() {
     final _$result = _$v ??
-        new _$TaskListEntity._(
+        _$TaskListEntity._(
             id: BuiltValueNullFieldError.checkNotNull(
                 id, 'TaskListEntity', 'id'),
             taskList: BuiltValueNullFieldError.checkNotNull(

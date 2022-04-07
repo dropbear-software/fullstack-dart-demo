@@ -28,7 +28,7 @@ void main() {
   //   expect(find.text('1'), findsOneWidget);
   // });
   group('A group of tests', () {
-    final awesome = true;
+    const awesome = true;
 
     setUp(() {
       // Additional setup goes here.
