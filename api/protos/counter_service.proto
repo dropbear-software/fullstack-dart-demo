@@ -1,0 +1,21 @@
+// Demo Service based on the Flutter Counter App
+syntax = "proto3";
+
+package demo.counter_service;
+
+import "google/protobuf/empty.proto";
+
+// A service endpoint that lets users increment or decrement the counter value
+service CounterService {
+  // Increase the count by 1
+  rpc IncreaseCount (google.protobuf.Empty) returns (Counter);
+  // Decrease the count by 1
+  rpc DecreaseCount (google.protobuf.Empty) returns (Counter);
+}
+
+// We also need to define the shape of the messages we will be passing
+message Counter {
+  // The current value of the counter
+  int32 total = 1;
+}
+

@@ -1,0 +1,26 @@
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+
+syntax = "proto3";
+
+package todart.v1alpha.resources;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+
+// A container to hold individual Tasks
+message TaskList {
+  // See https://google.aip.dev/123
+  option (google.api.resource) = {
+    type: "todart.dropbear.dev/TaskList"
+    pattern: "tasklist/{tasklist_id}"
+  };
+  
+  // See https://google.aip.dev/122
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The ID of the Task.
+  optional string id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // The name of the TaskList
+  string title = 3;
+}

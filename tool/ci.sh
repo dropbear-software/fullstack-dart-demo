@@ -76,12 +76,12 @@ for PKG in ${PKGS}; do
         dart format --output=none --set-exit-if-changed . || EXIT_CODE=$?
         ;;
       test_0)
-        echo 'flutter test'
-        flutter test || EXIT_CODE=$?
-        ;;
-      test_1)
         echo 'dart test'
         dart test || EXIT_CODE=$?
+        ;;
+      test_1)
+        echo 'flutter test'
+        flutter test || EXIT_CODE=$?
         ;;
       *)
         echo -e "\033[31mUnknown TASK '${TASK}' - TERMINATING JOB\033[0m"

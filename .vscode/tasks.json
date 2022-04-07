@@ -13,9 +13,22 @@
         "build"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/pkg/todart_api"
+        "cwd": "${workspaceFolder}/api"
       },
       "group": "build",
+      "presentation": {
+        "reveal": "always"
+      },
+    },
+    {
+      "label": "Run gRPC Web Proxy",
+      "type": "process",
+      "command": "grpcwebproxy",
+        "args": [
+          "--backend_addr=localhost:50002",
+          "--run_tls_server=false",
+          "--allow_all_origins"
+        ],
       "presentation": {
         "reveal": "always"
       },
