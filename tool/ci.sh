@@ -68,20 +68,20 @@ for PKG in ${PKGS}; do
       echo -e "\033[1mPKG: ${PKG}; TASK: ${TASK}\033[22m"
       case ${TASK} in
       analyze)
-        echo 'dart analyze'
-        dart analyze || EXIT_CODE=$?
+        echo 'dart analyze --fatal-infos .'
+        dart analyze --fatal-infos . || EXIT_CODE=$?
         ;;
       format)
         echo 'dart format --output=none --set-exit-if-changed .'
         dart format --output=none --set-exit-if-changed . || EXIT_CODE=$?
         ;;
       test_0)
-        echo 'dart test'
-        dart test || EXIT_CODE=$?
+        echo 'dart test --test-randomize-ordering-seed=random'
+        dart test --test-randomize-ordering-seed=random || EXIT_CODE=$?
         ;;
       test_1)
-        echo 'flutter test'
-        flutter test || EXIT_CODE=$?
+        echo 'flutter test --test-randomize-ordering-seed=random'
+        flutter test --test-randomize-ordering-seed=random || EXIT_CODE=$?
         ;;
       *)
         echo -e "\033[31mUnknown TASK '${TASK}' - TERMINATING JOB\033[0m"

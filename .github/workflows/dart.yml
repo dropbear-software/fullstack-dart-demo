@@ -37,22 +37,22 @@ jobs:
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "analyze; PKGS: api, application, server; `dart analyze`"
+    name: "smoke_test; Dart beta; PKGS: api, application, server; `dart format --output=none --set-exit-if-changed .`, `dart analyze --fatal-infos .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v3
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:api-application-server;commands:analyze"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:api-application-server;commands:format-analyze"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:api-application-server
-            os:ubuntu-latest;pub-cache-hosted;sdk:stable
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:api-application-server
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - uses: dart-lang/setup-dart@v1.3
         with:
-          sdk: stable
+          sdk: beta
       - id: checkout
         uses: actions/checkout@v3.0.0
       - id: api_pub_upgrade
@@ -60,37 +60,81 @@ jobs:
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: api
         run: dart pub upgrade
-      - name: api; dart analyze
+      - name: "api; dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.api_pub_upgrade.conclusion == 'success'"
         working-directory: api
-        run: dart analyze
+        run: "dart format --output=none --set-exit-if-changed ."
+      - name: "api; dart analyze --fatal-infos ."
+        if: "always() && steps.api_pub_upgrade.conclusion == 'success'"
+        working-directory: api
+        run: dart analyze --fatal-infos .
       - id: application_pub_upgrade
         name: application; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: application
         run: dart pub upgrade
-      - name: application; dart analyze
+      - name: "application; dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
         working-directory: application
-        run: dart analyze
+        run: "dart format --output=none --set-exit-if-changed ."
+      - name: "application; dart analyze --fatal-infos ."
+        if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
+        working-directory: application
+        run: dart analyze --fatal-infos .
       - id: server_pub_upgrade
         name: server; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: server
         run: dart pub upgrade
-      - name: server; dart analyze
+      - name: "server; dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.server_pub_upgrade.conclusion == 'success'"
         working-directory: server
-        run: dart analyze
+        run: "dart format --output=none --set-exit-if-changed ."
+      - name: "server; dart analyze --fatal-infos ."
+        if: "always() && steps.server_pub_upgrade.conclusion == 'success'"
+        working-directory: server
+        run: dart analyze --fatal-infos .
   job_003:
-    name: "analyze; PKGS: api, application, server; `dart format --output=none --set-exit-if-changed .`"
+    name: "smoke_test; Flutter master; PKG: application; `dart format --output=none --set-exit-if-changed .`, `dart analyze --fatal-infos .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v3
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:api-application-server;commands:format"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:master;packages:application;commands:format-analyze"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:master;packages:application
+            os:ubuntu-latest;pub-cache-hosted;sdk:master
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - uses: subosito/flutter-action@v2.3.0
+        with:
+          channel: master
+      - id: checkout
+        uses: actions/checkout@v3.0.0
+      - id: application_pub_upgrade
+        name: application; flutter pub pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: application
+        run: flutter pub pub upgrade
+      - name: "application; dart format --output=none --set-exit-if-changed ."
+        if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
+        working-directory: application
+        run: "dart format --output=none --set-exit-if-changed ."
+      - name: "application; dart analyze --fatal-infos ."
+        if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
+        working-directory: application
+        run: dart analyze --fatal-infos .
+  job_004:
+    name: "smoke_test; Dart stable; PKGS: api, application, server; `dart format --output=none --set-exit-if-changed .`, `dart analyze --fatal-infos .`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@v3
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:api-application-server;commands:format-analyze"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;sdk:stable;packages:api-application-server
             os:ubuntu-latest;pub-cache-hosted;sdk:stable
@@ -110,6 +154,10 @@ jobs:
         if: "always() && steps.api_pub_upgrade.conclusion == 'success'"
         working-directory: api
         run: "dart format --output=none --set-exit-if-changed ."
+      - name: "api; dart analyze --fatal-infos ."
+        if: "always() && steps.api_pub_upgrade.conclusion == 'success'"
+        working-directory: api
+        run: dart analyze --fatal-infos .
       - id: application_pub_upgrade
         name: application; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -119,6 +167,10 @@ jobs:
         if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
         working-directory: application
         run: "dart format --output=none --set-exit-if-changed ."
+      - name: "application; dart analyze --fatal-infos ."
+        if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
+        working-directory: application
+        run: dart analyze --fatal-infos .
       - id: server_pub_upgrade
         name: server; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -128,8 +180,111 @@ jobs:
         if: "always() && steps.server_pub_upgrade.conclusion == 'success'"
         working-directory: server
         run: "dart format --output=none --set-exit-if-changed ."
-  job_004:
-    name: "unit_test; PKG: api; `dart test`"
+      - name: "server; dart analyze --fatal-infos ."
+        if: "always() && steps.server_pub_upgrade.conclusion == 'success'"
+        working-directory: server
+        run: dart analyze --fatal-infos .
+  job_005:
+    name: "test; Dart beta; PKG: api; `dart test --test-randomize-ordering-seed=random`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@v3
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:api;commands:test_0"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:api
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: beta
+      - id: checkout
+        uses: actions/checkout@v3.0.0
+      - id: api_pub_upgrade
+        name: api; dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: api
+        run: dart pub upgrade
+      - name: "api; dart test --test-randomize-ordering-seed=random"
+        if: "always() && steps.api_pub_upgrade.conclusion == 'success'"
+        working-directory: api
+        run: "dart test --test-randomize-ordering-seed=random"
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+  job_006:
+    name: "test; Dart beta; PKG: server; `dart test --test-randomize-ordering-seed=random`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@v3
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:server;commands:test_0"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:server
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: beta
+      - id: checkout
+        uses: actions/checkout@v3.0.0
+      - id: server_pub_upgrade
+        name: server; dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: server
+        run: dart pub upgrade
+      - name: "server; dart test --test-randomize-ordering-seed=random"
+        if: "always() && steps.server_pub_upgrade.conclusion == 'success'"
+        working-directory: server
+        run: "dart test --test-randomize-ordering-seed=random"
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+  job_007:
+    name: "test; Flutter beta; PKG: application; `flutter test --test-randomize-ordering-seed=random`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@v3
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:application;commands:test_1"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta;packages:application
+            os:ubuntu-latest;pub-cache-hosted;sdk:beta
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - uses: subosito/flutter-action@v2.3.0
+        with:
+          channel: beta
+      - id: checkout
+        uses: actions/checkout@v3.0.0
+      - id: application_pub_upgrade
+        name: application; flutter pub pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: application
+        run: flutter pub pub upgrade
+      - name: "application; flutter test --test-randomize-ordering-seed=random"
+        if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
+        working-directory: application
+        run: "flutter test --test-randomize-ordering-seed=random"
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+  job_008:
+    name: "test; Dart stable; PKG: api; `dart test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -152,16 +307,17 @@ jobs:
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: api
         run: dart pub upgrade
-      - name: api; dart test
+      - name: "api; dart test --test-randomize-ordering-seed=random"
         if: "always() && steps.api_pub_upgrade.conclusion == 'success'"
         working-directory: api
-        run: dart test
+        run: "dart test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-  job_005:
-    name: "unit_test; PKG: server; `dart test`"
+      - job_004
+  job_009:
+    name: "test; Dart stable; PKG: server; `dart test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -184,16 +340,17 @@ jobs:
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: server
         run: dart pub upgrade
-      - name: server; dart test
+      - name: "server; dart test --test-randomize-ordering-seed=random"
         if: "always() && steps.server_pub_upgrade.conclusion == 'success'"
         working-directory: server
-        run: dart test
+        run: "dart test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
-  job_006:
-    name: "unit_test; PKG: application; `flutter test`"
+      - job_004
+  job_010:
+    name: "test; Flutter stable; PKG: application; `flutter test --test-randomize-ordering-seed=random`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -216,11 +373,12 @@ jobs:
         if: "always() && steps.checkout.conclusion == 'success'"
         working-directory: application
         run: flutter pub pub upgrade
-      - name: application; flutter test
+      - name: "application; flutter test --test-randomize-ordering-seed=random"
         if: "always() && steps.application_pub_upgrade.conclusion == 'success'"
         working-directory: application
-        run: flutter test
+        run: "flutter test --test-randomize-ordering-seed=random"
     needs:
       - job_001
       - job_002
       - job_003
+      - job_004

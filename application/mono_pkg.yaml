@@ -1,11 +1,18 @@
 # See https://github.com/google/mono_repo.dart for details on this file
 sdk:
 - stable
+- beta
 
 stages:
-# Register two jobs to run under the `analyze` stage.
-  - analyze:
-    - analyze
+- smoke_test:
+  - group:
     - format
-  - unit_test:
-    - test
+    - analyze: --fatal-infos .
+    sdk:
+    - beta
+    - stable
+    - master
+- test:
+  - test: --test-randomize-ordering-seed=random
+    os:
+    - linux
