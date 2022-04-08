@@ -4,5 +4,6 @@ self_validate: smoke_test
 github:
   cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.”
 
-merge_stages:
-- smoke_test
+# Wait for this https://github.com/google/mono_repo.dart/issues/375
+# merge_stages:
+# - smoke_test
