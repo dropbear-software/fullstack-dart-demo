@@ -9,19 +9,21 @@ import 'package:todart_server/src/services/task_list/domain/task_list_repository
 GetIt serviceLocator = GetIt.instance;
 void main() {
   group('Creating a TaskList', () {
-    late final CreateTaskListService service;
+    late final CreateTaskListService createTaskListService;
 
     setUp(() {
       serviceLocator
           .registerSingleton<TaskListRepository>(TaskListMemoryRepository());
-      service = CreateTaskListService();
+      createTaskListService = CreateTaskListService();
     });
 
     test('calculate', () {
-      final taskList = TaskList(title: 'Default List');
-      final serviceResult = service(taskList);
+      const taskListTitle = 'Default List';
+      final serviceResult =
+          createTaskListService(TaskList(title: taskListTitle));
 
       expect((serviceResult), isA<TaskListEntity>());
+      expect((serviceResult.taskList.title), equals(taskListTitle));
     });
   });
 }
