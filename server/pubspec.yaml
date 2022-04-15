@@ -10,6 +10,7 @@ environment:
 
 
 dependencies:
+  args: ^2.3.0
   built_value: ^8.1.4
   get_it: ^7.2.0
   todart_api: 
