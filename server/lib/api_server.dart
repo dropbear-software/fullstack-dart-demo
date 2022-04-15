@@ -17,7 +17,7 @@ class Server {
   Server() {
     _server = grpc.Server(
         _services,
-        ApplicationInterceptors(env: runtimeEnvironment.localDevelopment)
+        ApplicationInterceptors(env: RuntimeEnvironment.localDevelopment)
             .interceptors);
     _portnumber = 8080;
   }

@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:grpc/grpc.dart' as grpc;
+import 'package:todart_server/src/extractable/uuid.dart';
 
 import 'logger.dart';
 
-enum runtimeEnvironment {
+enum RuntimeEnvironment {
   localDevelopment,
   cloudDevelopment,
   notProduction,
@@ -16,13 +17,13 @@ enum runtimeEnvironment {
 class ApplicationInterceptors {
   final List<grpc.Interceptor> _interceptors = [];
 
-  ApplicationInterceptors({required runtimeEnvironment env}) {
+  ApplicationInterceptors({required RuntimeEnvironment env}) {
     switch (env) {
-      case runtimeEnvironment.localDevelopment:
+      case RuntimeEnvironment.localDevelopment:
         _addLocalDevInterceptors();
         _addCommonInterceptors();
         break;
-      case runtimeEnvironment.cloudDevelopment:
+      case RuntimeEnvironment.cloudDevelopment:
         _addCloudDevInterceptors();
         _addCommonInterceptors();
         break;
@@ -47,7 +48,7 @@ class ApplicationInterceptors {
 
 FutureOr<grpc.GrpcError?> addRequestId(
     grpc.ServiceCall call, grpc.ServiceMethod method) {
-  call.headers?.putIfAbsent('requestID', () => 'abc123');
+  call.headers?.putIfAbsent('requestID', () => Uuid().generateV4());
   return null;
 }
 
