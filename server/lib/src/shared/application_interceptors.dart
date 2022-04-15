@@ -2,48 +2,41 @@ import 'dart:async';
 import 'package:grpc/grpc.dart' as grpc;
 import 'package:todart_server/src/extractable/uuid.dart';
 
+import 'environment_parser.dart';
 import 'logger.dart';
-
-enum RuntimeEnvironment {
-  localDevelopment,
-  cloudDevelopment,
-  notProduction,
-  production
-}
 
 /// This class aims to make it easy to just specify an runtime environment
 /// and it will take care of adding the correct interceptors and in the
 /// correct order.
 class ApplicationInterceptors {
-  final List<grpc.Interceptor> _interceptors = [];
+  static List<grpc.Interceptor> forEnvironment(RuntimeEnvironment env) {
+    final List<grpc.Interceptor> interceptors = [];
 
-  ApplicationInterceptors({required RuntimeEnvironment env}) {
     switch (env) {
       case RuntimeEnvironment.localDevelopment:
-        _addLocalDevInterceptors();
-        _addCommonInterceptors();
+        interceptors.addAll(_getLocalDevInterceptors());
         break;
       case RuntimeEnvironment.cloudDevelopment:
-        _addCloudDevInterceptors();
-        _addCommonInterceptors();
+        break;
+      case RuntimeEnvironment.notProduction:
+        break;
+      case RuntimeEnvironment.production:
         break;
       default:
     }
+
+    interceptors.addAll(_getCommonInterceptors());
+
+    return List<grpc.Interceptor>.unmodifiable(interceptors);
   }
 
-  /// Return an unmodifiable list of [Interceptors] for the environment
-  List<grpc.Interceptor> get interceptors =>
-      List<grpc.Interceptor>.unmodifiable(_interceptors);
-
-  void _addCommonInterceptors() {
-    _interceptors.addAll([logIncomingRequest]);
+  static Iterable<grpc.Interceptor> _getLocalDevInterceptors() {
+    return [addRequestId];
   }
 
-  void _addLocalDevInterceptors() {
-    _interceptors.addAll([addRequestId]);
+  static Iterable<grpc.Interceptor> _getCommonInterceptors() {
+    return [logIncomingRequest];
   }
-
-  void _addCloudDevInterceptors() {}
 }
 
 FutureOr<grpc.GrpcError?> addRequestId(

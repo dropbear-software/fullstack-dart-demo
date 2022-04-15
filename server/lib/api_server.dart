@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:grpc/grpc.dart' as grpc;
 import 'src/shared/application_interceptors.dart';
 import 'src/infrastucture_layer.dart';
+import 'src/shared/environment_parser.dart';
 import 'src/shared/logger.dart';
 
 final List<grpc.Service> _services = [
@@ -11,15 +12,15 @@ final List<grpc.Service> _services = [
 ];
 
 class Server {
-  late final RuntimeEnvironment environment;
+  late final RuntimeEnvironment _environment;
   late final int _portnumber;
   late final grpc.Server _server;
 
   Server({required int port, required String env}) {
     _portnumber = port;
-    environment = _getEnvFromString(env);
+    _environment = RuntimeEnvParser.getEnvFromString(env);
     _server = grpc.Server(
-        _services, ApplicationInterceptors(env: environment).interceptors);
+        _services, ApplicationInterceptors.forEnvironment(_environment));
   }
 
   Future<void> start() async {
@@ -38,20 +39,5 @@ class Server {
     log.info("Interupt signal received, shutting down");
     await _server.shutdown();
     exit(0);
-  }
-}
-
-RuntimeEnvironment _getEnvFromString(String env) {
-  switch (env.toLowerCase().trim()) {
-    case 'local-dev':
-      return RuntimeEnvironment.localDevelopment;
-    case 'cloud-dev':
-      return RuntimeEnvironment.cloudDevelopment;
-    case 'non-prod':
-      return RuntimeEnvironment.notProduction;
-    case 'prod':
-      return RuntimeEnvironment.production;
-    default:
-      throw ArgumentError.value(env, 'env', 'Invalid environment specified');
   }
 }

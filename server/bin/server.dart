@@ -15,7 +15,7 @@ Future<void> main(List<String> args) async {
 
   try {
     final results = parser.parse(args);
-    setup();
+    setup(results['env']);
     final server = api_server.Server(
         env: results['env'], port: int.parse(results['port']));
     await server.start();
@@ -25,7 +25,4 @@ Future<void> main(List<String> args) async {
     // Exit code 64 indicates a usage error.
     exit(64);
   }
-
-  // print(results['env']);
-  // print(parser.usage);
 }
