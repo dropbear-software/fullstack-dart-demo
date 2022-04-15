@@ -2,7 +2,7 @@ import 'package:todart_api/api_client.dart';
 import 'package:grpc/grpc.dart';
 
 final channel = ClientChannel('127.0.0.1',
-    port: 50002,
+    port: 8080,
     options: const ChannelOptions(credentials: ChannelCredentials.insecure()));
 final TaskListServiceClient client = TaskListServiceClient(channel);
 

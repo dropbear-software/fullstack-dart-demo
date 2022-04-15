@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:grpc/grpc.dart' as grpc;
+import 'package:todart_server/src/shared/application_interceptors.dart';
 import 'src/infrastucture_layer.dart';
 import 'src/shared/logger.dart';
 
@@ -9,18 +10,16 @@ final List<grpc.Service> _services = [
   TaskServiceHandler()
 ];
 
-List<grpc.Interceptor> _interceptors = [
-  _ApplicationInterceptors.loggerOne,
-  _ApplicationInterceptors.loggerTwo
-];
-
 class Server {
   late final int _portnumber;
   late final grpc.Server _server;
 
   Server() {
-    _server = grpc.Server(_services, _interceptors);
-    _portnumber = 50002;
+    _server = grpc.Server(
+        _services,
+        ApplicationInterceptors(env: runtimeEnvironment.localDevelopment)
+            .interceptors);
+    _portnumber = 8080;
   }
 
   Future<void> start(List<String> args) async {
@@ -39,19 +38,5 @@ class Server {
     log.info("Interupt signal received, shutting down");
     await _server.shutdown();
     exit(0);
-  }
-}
-
-class _ApplicationInterceptors {
-  static FutureOr<grpc.GrpcError?> loggerOne(
-      grpc.ServiceCall call, grpc.ServiceMethod method) {
-    log.info('Incoming request for ${method.name}');
-    return null;
-  }
-
-  static FutureOr<grpc.GrpcError?> loggerTwo(
-      grpc.ServiceCall call, grpc.ServiceMethod method) {
-    log.info('Call info: ${call.clientMetadata}');
-    return null;
   }
 }
