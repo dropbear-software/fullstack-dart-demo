@@ -1,29 +1,60 @@
+import 'package:dropbear/dropbear.dart';
 import 'package:get_it/get_it.dart';
 import 'package:todart_api/api_server.dart';
 import 'package:todart_server/src/infrastucture_layer.dart';
 import 'package:todart_server/src/services/task_list/application/services/create_task_list_service.dart';
-import 'package:test/test.dart';
 import 'package:todart_server/src/services/task_list/domain/task_list_entity.dart';
 import 'package:todart_server/src/services/task_list/domain/task_list_repository.dart';
+import 'package:test/test.dart';
 
 GetIt serviceLocator = GetIt.instance;
 void main() {
   group('Creating a TaskList', () {
-    late final CreateTaskListService createTaskListService;
+    serviceLocator
+        .registerSingleton<TaskListRepository>(TaskListMemoryRepository());
+    final CreateTaskListService createTaskListService = CreateTaskListService();
 
-    setUp(() {
-      serviceLocator
-          .registerSingleton<TaskListRepository>(TaskListMemoryRepository());
-      createTaskListService = CreateTaskListService();
+    // Any code that should run before each test
+    setUp(() {});
+
+    group('with invalid data', () {
+      test('will not work without a TaskList title', () async {
+        expect(() => createTaskListService(TaskList()),
+            throwsA(isA<ArgumentError>()));
+      });
     });
 
-    test('calculate', () async {
+    group('with valid data', () {
       const taskListTitle = 'Default List';
-      final serviceResult =
-          await createTaskListService(TaskList(title: taskListTitle));
+      test('returns a TaskListEntity', () async {
+        final serviceResult =
+            await createTaskListService(TaskList(title: taskListTitle));
 
-      expect((serviceResult), isA<TaskListEntity>());
-      expect((serviceResult.taskList.title), equals(taskListTitle));
+        expect(serviceResult, isA<TaskListEntity>());
+      });
+
+      test('correctly sets the specified properties', () async {
+        final serviceResult =
+            await createTaskListService(TaskList(title: taskListTitle));
+
+        expect((serviceResult.taskList.title), equals(taskListTitle));
+      });
+
+      test('assigns a valid identifier ', () async {
+        final serviceResult =
+            await createTaskListService(TaskList(title: taskListTitle));
+
+        expect((serviceResult.taskList.id), isNotNull);
+        expect((ResourceIdentifier.isValid(serviceResult.taskList.id)), isTrue);
+      });
+
+      test('returns an immutable TaskList', () async {
+        final serviceResult =
+            await createTaskListService(TaskList(title: taskListTitle));
+
+        expect(() => serviceResult.taskList.title = 'New List',
+            throwsA(isA<UnsupportedError>()));
+      });
     });
   });
 }
