@@ -7,7 +7,7 @@ class GetTaskListService {
   final TaskListRepository _taskListRepository =
       serviceLocator<TaskListRepository>();
 
-  TaskList call(String taskListId) {
-    return _taskListRepository.getTaskList(taskListId);
+  Future<TaskList> call(String taskListId) async {
+    return await _taskListRepository.getTaskList(taskListId);
   }
 }

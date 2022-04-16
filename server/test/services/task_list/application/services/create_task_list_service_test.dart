@@ -17,10 +17,10 @@ void main() {
       createTaskListService = CreateTaskListService();
     });
 
-    test('calculate', () {
+    test('calculate', () async {
       const taskListTitle = 'Default List';
       final serviceResult =
-          createTaskListService(TaskList(title: taskListTitle));
+          await createTaskListService(TaskList(title: taskListTitle));
 
       expect((serviceResult), isA<TaskListEntity>());
       expect((serviceResult.taskList.title), equals(taskListTitle));

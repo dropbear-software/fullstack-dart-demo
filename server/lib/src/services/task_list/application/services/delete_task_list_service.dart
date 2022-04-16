@@ -5,7 +5,7 @@ class DeleteTaskListService {
   final TaskListRepository _taskListRepository =
       serviceLocator<TaskListRepository>();
 
-  void call(String taskListId) {
-    _taskListRepository.deleteTaskList(taskListId);
+  Future<void> call(String taskListId) async {
+    await _taskListRepository.deleteTaskList(taskListId);
   }
 }

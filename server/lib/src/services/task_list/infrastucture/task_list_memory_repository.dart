@@ -11,35 +11,37 @@ class TaskListMemoryRepository implements TaskListRepository {
   static final _database = _Database();
 
   @override
-  TaskListEntity createTaskList(TaskList list) {
+  Future<TaskListEntity> createTaskList(TaskList list) {
     list.id = nextIdentity();
     _database.taskLists.putIfAbsent(list.id, () => list);
-    return TaskListEntity((b) => b
+    final entity = TaskListEntity((b) => b
       ..id = list.id
       ..taskList = list);
+    return Future.value(entity);
   }
 
   @override
-  void deleteTaskList(String taskListId) {
-    final result = _database.taskLists.remove(taskListId);
+  Future<void> deleteTaskList(String taskListId) async {
+    final result =
+        await Future.sync(() => _database.taskLists.remove(taskListId));
     if (result == null) {
       throw GrpcError.notFound();
     }
   }
 
   @override
-  TaskList getTaskList(String taskListId) {
+  Future<TaskList> getTaskList(String taskListId) {
     final result = _database.taskLists[taskListId];
 
     if (result == null) {
       throw GrpcError.notFound();
     }
 
-    return result;
+    return Future.value(result);
   }
 
   @override
-  Iterable<TaskList> listTaskLists(ListTaskListsRequest request) {
+  Future<Iterable<TaskList>> listTaskLists(ListTaskListsRequest request) {
     if (request.pageToken.isNotEmpty) {
       // TODO: Consider checking if the pageToken matches any values at all
       // before attempting to return anything
@@ -47,19 +49,20 @@ class TaskListMemoryRepository implements TaskListRepository {
       // Get the taskLists from the "database" and don't start counting until
       // you find one where the id matches the pageToken then only
       // take as many as specified by the `request.pageSize`
-      return _database.taskLists.values
+      final taskLists = _database.taskLists.values
           .skipWhile((value) => value.id == request.pageToken)
           .take(request.pageSize);
+      return Future.value(taskLists);
     } else {
       // Start from the start but only return as many as requested
-      return _database.taskLists.values.take(request.pageSize);
+      return Future.value(_database.taskLists.values.take(request.pageSize));
     }
   }
 
   @override
-  TaskList updateTaskList(TaskList taskList) {
+  Future<TaskList> updateTaskList(TaskList taskList) {
     _database.taskLists[taskList.id] = taskList;
-    return taskList;
+    return Future.value(taskList);
   }
 
   @override
