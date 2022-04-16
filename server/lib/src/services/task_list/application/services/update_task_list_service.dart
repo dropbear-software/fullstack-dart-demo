@@ -8,13 +8,13 @@ class UpdateTaskListService {
   final TaskListRepository _taskListRepository =
       serviceLocator<TaskListRepository>();
 
-  TaskList call(UpdateTaskListRequest request) {
+  Future<TaskList> call(UpdateTaskListRequest request) async {
     final mask = request.updateMask;
     final updatedTaskList = request.tasklist;
 
     // Fetch the item we want to update as it currently exists
     final originalTaskList =
-        _taskListRepository.getTaskList(request.tasklist.id);
+        await _taskListRepository.getTaskList(request.tasklist.id);
 
     // Take the updatedTaskList and filter it for only the allowed values
     final filteredTaskList = _filterIncomingUpdate(mask, updatedTaskList);

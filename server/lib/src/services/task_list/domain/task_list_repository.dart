@@ -5,13 +5,13 @@ import 'task_list_entity.dart';
 abstract class TaskListRepository {
   String nextIdentity();
 
-  TaskListEntity createTaskList(TaskList list);
+  Future<TaskListEntity> createTaskList(TaskList list);
 
-  Iterable<TaskList> listTaskLists(ListTaskListsRequest request);
+  Future<Iterable<TaskList>> listTaskLists(ListTaskListsRequest request);
 
-  TaskList getTaskList(String taskListId);
+  Future<TaskList> getTaskList(String taskListId);
 
-  void deleteTaskList(String taskListId);
+  Future<void> deleteTaskList(String taskListId);
 
-  TaskList updateTaskList(TaskList taskList);
+  Future<TaskList> updateTaskList(TaskList taskList);
 }

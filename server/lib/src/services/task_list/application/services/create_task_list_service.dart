@@ -8,7 +8,7 @@ class CreateTaskListService {
   final TaskListRepository _taskListRepository =
       serviceLocator<TaskListRepository>();
 
-  TaskListEntity call(TaskList taskList) {
-    return _taskListRepository.createTaskList(taskList);
+  Future<TaskListEntity> call(TaskList taskList) async {
+    return await _taskListRepository.createTaskList(taskList);
   }
 }

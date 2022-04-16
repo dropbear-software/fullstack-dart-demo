@@ -15,34 +15,35 @@ class TaskListServiceHandler extends TaskListServiceBase {
 
   @override
   Future<TaskList> createTaskList(
-      ServiceCall call, CreateTaskListRequest request) {
-    final result = _createTaskListService(request.tasklist);
+      ServiceCall call, CreateTaskListRequest request) async {
+    final result = await _createTaskListService(request.tasklist);
     log.info('Task List created with id ${result.id}');
-    return Future.value(result.taskList);
+    return result.taskList;
   }
 
   @override
   Future<Empty> deleteTaskList(
-      ServiceCall call, DeleteTaskListRequest request) {
-    _deleteTaskListService(request.name);
+      ServiceCall call, DeleteTaskListRequest request) async {
+    await _deleteTaskListService(request.name);
     log.info('Task List deleted with id ${request.name}');
-    return Future.value(Empty());
+    return Empty();
   }
 
   @override
-  Future<TaskList> getTaskList(ServiceCall call, GetTaskListRequest request) {
-    final result = _getTaskListService(request.name);
+  Future<TaskList> getTaskList(
+      ServiceCall call, GetTaskListRequest request) async {
+    final result = await _getTaskListService(request.name);
     log.info('Task List fetched with id ${result.id}');
-    return Future.value(result);
+    return result;
   }
 
   /// See https://google.aip.dev/158 for guidance on Pagination
   @override
   Future<ListTaskListsResponse> listTaskLists(
-      ServiceCall call, ListTaskListsRequest request) {
+      ServiceCall call, ListTaskListsRequest request) async {
     request.validate();
 
-    final taskLists = _listTaskListsService(request);
+    final taskLists = await _listTaskListsService(request);
     log.info('Fetched ${taskLists.length} task lists');
 
     // Tell it the record it should start searching from next time
@@ -54,14 +55,14 @@ class TaskListServiceHandler extends TaskListServiceBase {
     final result = ListTaskListsResponse(
         tasklists: taskLists,
         nextPageToken: base64.encode(nextPageToken.writeToBuffer()));
-    return Future.value(result);
+    return result;
   }
 
   @override
   Future<TaskList> updateTaskList(
-      ServiceCall call, UpdateTaskListRequest request) {
-    final result = _updateTaskListService(request);
+      ServiceCall call, UpdateTaskListRequest request) async {
+    final result = await _updateTaskListService(request);
     log.info('Updated TaskList with id ${result.id}');
-    return Future.value(result);
+    return result;
   }
 }
