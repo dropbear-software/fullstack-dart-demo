@@ -67,7 +67,8 @@ class TaskListMemoryRepository implements TaskListRepository {
 
   @override
   String nextIdentity() {
-    return Uuid().generateV4();
+    final id = ResourceIdentifier();
+    return id.toString();
   }
 }
 
