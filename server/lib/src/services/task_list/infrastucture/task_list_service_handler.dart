@@ -16,6 +16,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<TaskList> createTaskList(
       ServiceCall call, CreateTaskListRequest request) async {
+    request.validate();
     final result = await _createTaskListService(request.tasklist);
     log.info('Task List created with id ${result.id}');
     return result.taskList;
@@ -24,6 +25,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<Empty> deleteTaskList(
       ServiceCall call, DeleteTaskListRequest request) async {
+    request.validate();
     await _deleteTaskListService(request.name);
     log.info('Task List deleted with id ${request.name}');
     return Empty();
@@ -32,6 +34,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<TaskList> getTaskList(
       ServiceCall call, GetTaskListRequest request) async {
+    request.validate();
     final result = await _getTaskListService(request.name);
     log.info('Task List fetched with id ${result.id}');
     return result;
@@ -61,6 +64,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<TaskList> updateTaskList(
       ServiceCall call, UpdateTaskListRequest request) async {
+    request.validate();
     final result = await _updateTaskListService(request);
     log.info('Updated TaskList with id ${result.id}');
     return result;

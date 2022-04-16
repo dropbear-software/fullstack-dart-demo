@@ -15,3 +15,8 @@ updates:
     directory: "/server"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "pub"
+    directory: "/pkg/dropbear"
+    schedule:
+      interval: "weekly"
