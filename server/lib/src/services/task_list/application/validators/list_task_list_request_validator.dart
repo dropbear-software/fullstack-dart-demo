@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:todart_api/api_server.dart';
+import 'package:todart_api/api_server.dart' show ListTaskListsRequest;
 import 'package:grpc/grpc.dart' show GrpcError;
 
 /// See https://google.aip.dev/158 for Pagination Guidance
-extension Validator on ListTaskListsRequest {
+extension ListTaskListsRequestValidator on ListTaskListsRequest {
   void validate() {
     _validatePageSize();
     _validatePageToken();
