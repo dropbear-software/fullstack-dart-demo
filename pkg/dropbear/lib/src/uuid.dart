@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 /// A UUID generator library.
-library uuid;
+library dropbear.uuid;
 
 import 'dart:math' show Random;
 
