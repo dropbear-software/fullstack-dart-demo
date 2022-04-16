@@ -15,10 +15,10 @@ import 'package:quiver/iterables.dart';
 /// Example usage
 /// ```dart
 /// class MyResource {
-///   late final CloudResouceIdentity id;
+///   late final ResourceIdentifier id;
 ///
 ///   MyResource(){
-///     id = CloudResourceIdentity;
+///     id = ResourceIdentifier;
 ///   }
 /// }
 /// ```
@@ -54,13 +54,13 @@ class ResourceIdentifier {
 
   // Public Static Methods
 
-  /// Validates a given [CloudResourceIdentity]
+  /// Validates a given [ResourceIdentifier]
   ///
   /// Returns `true` if the [String] provided is a valid
-  /// [CloudResourceIdentity].
+  /// [ResourceIdentifier].
   ///
   /// ```dart
-  /// CloudResourceIdentity.isValid(WN9P3405N1MQ2KXK5X60A) == true
+  /// ResourceIdentifier.isValid(WN9P3405N1MQ2KXK5X60A) == true
   /// ```
   static bool isValid(String identifier) {
     // If there are any dashes in the identifier remove them first

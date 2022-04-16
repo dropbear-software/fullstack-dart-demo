@@ -32,6 +32,7 @@ class TaskListServiceHandler extends TaskListServiceBase {
   @override
   Future<TaskList> getTaskList(
       ServiceCall call, GetTaskListRequest request) async {
+    request.validate();
     final result = await _getTaskListService(request.name);
     log.info('Task List fetched with id ${result.id}');
     return result;
