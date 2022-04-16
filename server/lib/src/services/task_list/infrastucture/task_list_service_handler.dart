@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:grpc/service_api.dart';
 import 'package:todart_api/api_server.dart';
-import 'package:todart_server/src/shared/logger.dart';
-import 'package:todart_server/src/services/task_list/application/services.dart';
-import 'package:todart_server/src/services/task_list/application/validators.dart';
+
+import '../../../shared/logger.dart';
+import '../application/services.dart';
+import '../application/validators.dart';
 
 class TaskListServiceHandler extends TaskListServiceBase {
   final _createTaskListService = CreateTaskListService();
