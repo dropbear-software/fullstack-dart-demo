@@ -19,7 +19,7 @@ void main() {
 
     group('with invalid data', () {
       test('will not work without a TaskList title', () async {
-        expect(() => createTaskListService(TaskList()),
+        await expectLater(() => createTaskListService(TaskList()),
             throwsA(isA<ArgumentError>()));
       });
     });
@@ -46,6 +46,15 @@ void main() {
 
         expect((serviceResult.taskList.id), isNotNull);
         expect((ResourceIdentifier.isValid(serviceResult.taskList.id)), isTrue);
+      });
+
+      test('assigns a valid name ', () async {
+        final serviceResult =
+            await createTaskListService(TaskList(title: taskListTitle));
+
+        expect((serviceResult.taskList.name), isNotNull);
+        expect((serviceResult.taskList.name),
+            equals('tasklists/${serviceResult.taskList.id}'));
       });
 
       test('returns an immutable TaskList', () async {

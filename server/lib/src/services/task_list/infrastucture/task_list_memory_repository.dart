@@ -13,6 +13,7 @@ class TaskListMemoryRepository implements TaskListRepository {
   @override
   Future<TaskListEntity> createTaskList(TaskList list) {
     list.id = nextIdentity();
+    list.name = 'tasklists/${list.id}';
     list.freeze();
     _database.taskLists.putIfAbsent(list.id, () => list);
     final entity = TaskListEntity((b) => b
