@@ -51,7 +51,7 @@ RUN unzip grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64.zip -d /home/${EN
 RUN mv /home/${ENDUSER}/.grpcwebproxy/dist/grpcwebproxy-v${GRPC_WEB_PROXY_VERSION}-linux-x86_64 /home/${ENDUSER}/.grpcwebproxy/dist/grpcwebproxy
 
 # Download protolint
-ENV PROTOLINT_VERSION=0.37.1
+ENV PROTOLINT_VERSION=0.38.3
 RUN curl -LO https://github.com/yoheimuta/protolint/releases/download/v${PROTOLINT_VERSION}/protolint_${PROTOLINT_VERSION}_Linux_x86_64.tar.gz
 RUN tar -xf protolint_${PROTOLINT_VERSION}_Linux_x86_64.tar.gz --directory /tmp
 RUN mv /tmp/protolint /home/${ENDUSER}/.local/bin/
