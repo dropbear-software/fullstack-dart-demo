@@ -40,7 +40,7 @@ ENV ENDUSER=vscode
 RUN git clone https://github.com/flutter/flutter.git -b stable /home/${ENDUSER}/.flutter
 
 # Download Protocol Buffers Compiler
-ENV PROTOC_VERSION=3.20.0
+ENV PROTOC_VERSION=21.3
 RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip
 RUN unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /home/${ENDUSER}/.local
 
