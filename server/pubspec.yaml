@@ -6,7 +6,7 @@ publish_to: 'none'
 # homepage: https://www.example.com
 
 environment:
-  sdk: '>=2.16.2 <3.0.0'
+  sdk: '>=2.17.6 <3.0.0'
 
 
 dependencies:
@@ -17,10 +17,12 @@ dependencies:
     path: ../api
   dropbear:
     path: ../pkg/dropbear
+  grpc: ^3.0.2
+  logging: ^1.0.2
 
 
 dev_dependencies:
   build_runner: ^2.1.8
   built_value_generator: ^8.1.4
-  lints: ^1.0.0
+  lints: ^2.0.0
   test: ^1.16.0
