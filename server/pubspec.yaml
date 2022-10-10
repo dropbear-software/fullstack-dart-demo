@@ -18,7 +18,7 @@ dependencies:
   dropbear:
     path: ../pkg/dropbear
   grpc: ^3.0.2
-  logging: ^1.0.2
+  logging: ^1.1.0
 
 
 dev_dependencies:
