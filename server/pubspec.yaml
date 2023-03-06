@@ -11,7 +11,7 @@ environment:
 
 dependencies:
   args: ^2.3.1
-  built_value: ^8.4.0
+  built_value: ^8.4.4
   get_it: ^7.2.0
   todart_api: 
     path: ../api
